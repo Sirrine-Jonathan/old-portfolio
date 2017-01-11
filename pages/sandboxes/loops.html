@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8">
+		<title>Loops, etc.</title>
+	<script>
+		
+		//Variables
+		var browser, uAgent = window.navigator.userAgent;
+		
+		//Array
+		var studyTopics = [
+			"Loops",
+			"Conditional Statements", 
+			"Functions",
+			"Variables",
+			"Parameters",
+			"Arrays",
+			"Associative Arrays"
+		];
+		
+		//Conditional Statements
+		if(uAgent.indexOf("Chrome")){
+			browser = "Chrome";
+		} else if (uAgent.indexOf("Safari")){
+			browser = "Safari";
+		} else if (uAgent.indexOf("Safari")){
+			browser = "Opera";
+		} else if (uAgent.indexOf("Safari")){
+			browser = "Firefox";
+		} else if (uAgent.indexOf("Safari")){
+			browser = "Internet Explorer";
+		}
+		
+		console.log("your browser is: "+browser);
+		
+		window.onload = function(){
+			for(let l=0; l<studyTopics.length;l++){
+				let list = document.getElementById('list');
+				let li = document.createElement('li');
+				let text = document.createTextNode(studyTopics[l]);
+				li.appendChild(text);
+				list.appendChild(li);
+			}
+		}
+
+		//associative array
+		var team = [
+			{firstName: "Tyler",
+			lastName: "Stanley"},
+			{firstName: "Shanna-Mae",
+			lastName: "Slight"},
+			{firstName: "Janine",
+			lastName: "Ortiz"},
+			{firstName: "Jonathan",
+			lastName: "Sirrine"},
+		]
+		
+		
+		
+		
+		
+	</script>
+	</head>
+	<body>
+		<h3>This sandbox implements...</h3>
+		<ul id="list">
+		
+		</ul>
+		<div id="output">
+		view sources in the developer tools to see the code<br />
+		and the console to see the output
+		</div>
+	</body>
+</html>
