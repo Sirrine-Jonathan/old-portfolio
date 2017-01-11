@@ -1,75 +1,66 @@
 <!DOCTYPE HTML>
 <html lang="en-us">
 	<head>
-		<title>Loops, etc.</title>
+		<title>Loops</title>
 		<link href="../style.css" rel="stylesheet"/>
 	<script>
 		
-		//Variables
-		var browser, uAgent = window.navigator.userAgent;
-		
-		//Array
-		var studyTopics = [
-			"Loops",
-			"Conditional Statements", 
-			"Functions",
-			"Variables",
-			"Parameters",
-			"Arrays",
-			"Associative Arrays"
-		];
-		
-		//Conditional Statements
-		if(uAgent.indexOf("Chrome")){
-			browser = "Chrome";
-		} else if (uAgent.indexOf("Safari")){
-			browser = "Safari";
-		} else if (uAgent.indexOf("Safari")){
-			browser = "Opera";
-		} else if (uAgent.indexOf("Safari")){
-			browser = "Firefox";
-		} else if (uAgent.indexOf("Safari")){
-			browser = "Internet Explorer";
-		}
-		
-		console.log("your browser is: "+browser);
-		
-		window.onload = function(){
-			for(let l=0; l<studyTopics.length;l++){
-				let list = document.getElementById('list');
-				let li = document.createElement('li');
-				let text = document.createTextNode(studyTopics[l]);
-				li.appendChild(text);
-				list.appendChild(li);
-			}
-		}
-
-		//associative array
 		var team = [
-			{firstName: "Tyler",
-			lastName: "Stanley"},
-			{firstName: "Shanna-Mae",
-			lastName: "Slight"},
-			{firstName: "Janine",
-			lastName: "Ortiz"},
-			{firstName: "Jonathan",
-			lastName: "Sirrine"},
+			"Tyler",
+			"Shanna-Mae",
+			"Janine",
+			"Jonathan"
 		]
 		
+		//FOR LOOP 
+		//happy path1
+		for(var i = 0; i < team.length; i++){
+			console.log('happy path1: '+team[i]);
+		}
 		
+		//sad path1
+		for(var j = 0; j <= team.length; j++){
+			console.log('sad path1: '+team[j]); //runs too long
+		}
 		
+		//sad path2
+		for(k = 0; k > team.length; k++){
+			console.log('sad path2: '+team[k]); //never runs 
+		}
 		
+		//WHILE LOOP
+		//happy path2
+		var w = 0;
+		while(w < team.length){
+			console.log('happy papth2: '+team[w]);
+			w++
+		}
+		
+		//sad path3
+		var x = 1;
+		while(x < team.length){
+			console.log('sad path3: '+team[x]); //skips 0th position
+			x++;
+		}
+		
+		//sad path4
+		var y = 0;
+		while(y < team.length){
+			y++;
+			console.log('sad path4: '+team[y]); //skips 0th position but still runs 4 times
+		}
 		
 	</script>
 	</head>
 	<body>
-		<h3>This sandbox implements...</h3>
-		<ul id="list">
-		
-		</ul>
+		<h1>Loops Sandbox</h1>
 		<div id="output">
-		view sources in the developer tools to see the code<br />
-		and the console to see the output
+			view sources in the developer tools to see the code<br />
+			and the console to see the output
+		</div>
+		<div class="nav">
+			<a href="../index.html">home</a> |
+			<a href="../pages/LoopsHOME.html">back</a>
 		</div>
 	</body>
 </html>

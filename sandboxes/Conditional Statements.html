@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+	<head>
+		<title>Conditional Statements</title>
+		<link href="../style.css" rel="stylesheet"/>
+	<script>
+		
+		//Variables
+		var browser, uAgent = window.navigator.userAgent;
+		
+		//Conditional Statements
+		if(uAgent.indexOf("Chrome")){
+			browser = "Chrome";
+		} else if (uAgent.indexOf("Safari")){
+			browser = "Safari";
+		} else if (uAgent.indexOf("Safari")){
+			browser = "Opera";
+		} else if (uAgent.indexOf("Safari")){
+			browser = "Firefox";
+		} else if (uAgent.indexOf("Safari")){
+			browser = "Internet Explorer";
+		}
+		
+		console.log("your browser is: "+browser);		
+		
+	</script>
+	</head>
+	<body>
+		<h1>Conditional Statements Sandbox</h1>
+		<div id="output">
+			view sources in the developer tools to see the code<br />
+			and the console to see the output
+		</div>
+		<div class="nav">
+			<a href="../index.html">home</a> |
+			<a href="../pages/LoopsHOME.html">back</a>
+		</div>
+	</body>
+</html>
