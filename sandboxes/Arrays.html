@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+	<head>
+		<title>Arrays</title>
+		<link href="../style.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<h1>Arrays Sandbox</h1>
+		<div>
+			view sources in the developer tools to see the code<br />
+			code output can be seen below:<br /><br />
+		</div>
+		<div id="output">
+		</div>
+		<div class="nav">
+			<a href="../index.html">home</a> |
+			<a href="../pages/LoopsHOME.html">back</a>
+		</div>
+	<script>
+		
+		var output = document.getElementById('output');
+		
+		//basic array
+		var team = [
+			"Tyler",
+			"Shanna-Mae",
+			"Janine",
+			"Jonathan"
+		];
+		domOutput(team);
+		
+		/*SOME ARRAY METHODS*/
+		//removes last element;
+		var lastEle = team.pop();
+		domOutput(team);
+	
+		//puts last element back;
+		team.push(lastEle);
+		domOutput(team);
+		
+		//removes first element
+		var firstEle = team.shift();
+		domOutput(team);
+		
+		//puts first 
+		team.unshift(firstEle);
+		domOutput(team);
+		
+		//forEach allows you to use a function on each element in the array. 
+		team.forEach(function(item){
+			domOutput(item);
+		});
+		
+		
+		
+		
+		function domOutput(node){
+			let newNode = document.createTextNode(node);
+			output.appendChild(newNode);
+			output.innerHTML += '<br>';
+		}
+	</script>
+	</body>
+</html>

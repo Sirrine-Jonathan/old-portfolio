@@ -3,32 +3,48 @@
 	<head>
 		<title>Associative Arrays</title>
 		<link href="../style.css" rel="stylesheet"/>
-	<script>
-
-		//associative array
-		var team = [
-			{firstName: "Tyler",
-			lastName: "Stanley"},
-			{firstName: "Shanna-Mae",
-			lastName: "Slight"},
-			{firstName: "Janine",
-			lastName: "Ortiz"},
-			{firstName: "Jonathan",
-			lastName: "Sirrine"},
-		]
-		
-		
-	</script>
 	</head>
 	<body>
 		<h1>Associative Arrays Sandbox</h1>
+		<div>
+			view sources in the developer tools to see the code.<br />
+			code output can be seen below:<br /><br />
+		</div>
 		<div id="output">
-			view sources in the developer tools to see the code<br />
-			and the console to see the output
 		</div>
 		<div class="nav">
 			<a href="../index.html">home</a> |
 			<a href="../pages/LoopsHOME.html">back</a>
 		</div>
+	<script>
+		var output = document.getElementById('output');
+		
+				var team = [
+			"Tyler",
+			"Shanna-Mae",
+			"Janine",
+			"Jonathan"
+		];
+		
+		var team = [];
+		team['one'] = 'Tyler';
+		team['two'] = 'Shanna-Mae';
+		team['three'] = 'Janine';
+		team['four'] = 'Jonathan';
+		
+		
+		console.log(team); //in the console
+		var text = document.createTextNode(team); //but it will not show up when added to the dom like an array. 
+		output.appendChild(text);
+		
+		text = document.createTextNode(team['four']); //unless you specify the element that you want.
+		output.appendChild(text);
+		
+		output.innerHTML += '<br />';
+		text = document.createTextNode('Array length: '+team.length); //an associative array does not behave like an array because it is more like an object. 
+		output.appendChild(text);
+
+		
+	</script>
 	</body>
 </html>

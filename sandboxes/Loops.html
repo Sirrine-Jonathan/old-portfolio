@@ -3,6 +3,19 @@
 	<head>
 		<title>Loops</title>
 		<link href="../style.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<h1>Loops Sandbox</h1>
+		<div>
+			view sources in the developer tools to see the code<br />
+			code output can be seen below:<br /><br />
+		</div>
+		<div id="output">
+		</div>
+		<div class="nav">
+			<a href="../index.html">home</a> |
+			<a href="../pages/LoopsHOME.html">back</a>
+		</div>
 	<script>
 		
 		var team = [
@@ -15,31 +28,31 @@
 		//FOR LOOP 
 		//happy path1
 		for(var i = 0; i < team.length; i++){
-			console.log('happy path1: '+team[i]);
+			document.getElementById('output').innerHTML += 'happy path1: '+team[i]+'<br />';
 		}
 		
 		//sad path1
 		for(var j = 0; j <= team.length; j++){
-			console.log('sad path1: '+team[j]); //runs too long
+			document.getElementById('output').innerHTML += 'sad path1: '+team[j]+'<br />'; //runs too long
 		}
 		
 		//sad path2
 		for(k = 0; k > team.length; k++){
-			console.log('sad path2: '+team[k]); //never runs 
+			document.getElementById('output').innerHTML += 'sad path2: '+team[k]+'<br />'; //never runs 
 		}
 		
 		//WHILE LOOP
 		//happy path2
 		var w = 0;
 		while(w < team.length){
-			console.log('happy papth2: '+team[w]);
+			document.getElementById('output').innerHTML += 'happy papth2: '+team[w]+'<br />';
 			w++
 		}
 		
 		//sad path3
 		var x = 1;
 		while(x < team.length){
-			console.log('sad path3: '+team[x]); //skips 0th position
+			document.getElementById('output').innerHTML += 'sad path3: '+team[x]+'<br />'; //skips 0th position
 			x++;
 		}
 		
@@ -47,20 +60,9 @@
 		var y = 0;
 		while(y < team.length){
 			y++;
-			console.log('sad path4: '+team[y]); //skips 0th position but still runs 4 times
+			document.getElementById('output').innerHTML += 'sad path4: '+team[y]+'<br />'; //skips 0th position but still runs 4 times
 		}
 		
 	</script>
-	</head>
-	<body>
-		<h1>Loops Sandbox</h1>
-		<div id="output">
-			view sources in the developer tools to see the code<br />
-			and the console to see the output
-		</div>
-		<div class="nav">
-			<a href="../index.html">home</a> |
-			<a href="../pages/LoopsHOME.html">back</a>
-		</div>
 	</body>
 </html>

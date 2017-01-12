@@ -3,6 +3,19 @@
 	<head>
 		<title>Conditional Statements</title>
 		<link href="../style.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<h1>Conditional Statements Sandbox</h1>
+		<div>
+			view sources in the developer tools to see the code<br />
+			code output can be seen below:<br /><br />
+		</div>
+		<div id="output">
+		</div>
+		<div class="nav">
+			<a href="../index.html">home</a> |
+			<a href="../pages/LoopsHOME.html">back</a>
+		</div>
 	<script>
 		
 		//Variables
@@ -21,19 +34,10 @@
 			browser = "Internet Explorer";
 		}
 		
-		console.log("your browser is: "+browser);		
+		var output = document.getElementById('output')
+		var text = document.createTextNode("your browser is: "+browser);
+		output.appendChild(text);
 		
 	</script>
-	</head>
-	<body>
-		<h1>Conditional Statements Sandbox</h1>
-		<div id="output">
-			view sources in the developer tools to see the code<br />
-			and the console to see the output
-		</div>
-		<div class="nav">
-			<a href="../index.html">home</a> |
-			<a href="../pages/LoopsHOME.html">back</a>
-		</div>
 	</body>
 </html>

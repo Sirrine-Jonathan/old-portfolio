@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+	<head>
+		<title>Parameters</title>
+		<link href="../style.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<h1>Parameters Sandbox</h1>
+		<div>
+			view sources in the developer tools to see the code.<br />
+			code output can be seen below:<br /><br />
+		</div>
+		<div id="output">
+		</div>
+		<div class="nav">
+			<a href="../index.html">home</a> |
+			<a href="../pages/LoopsHOME.html">back</a>
+		</div>
+	<script>
+		var output = document.getElementById('output');
+		
+		function paraTest(parameter){
+			var text = document.createTextNode(parameter);
+			output.appendChild(text);
+		}
+		
+		paraTest('I can put things here');
+		
+	</script>
+	</body>
+</html>

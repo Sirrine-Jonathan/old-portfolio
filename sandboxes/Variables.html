@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+	<head>
+		<title>Variables</title>
+		<link href="../style.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<h1>Variables Sandbox</h1>
+		<div>
+			view sources in the developer tools to see the code.<br />
+			code output can be seen below:<br /><br />
+		</div>
+		<div id="output">
+		</div>
+		<div class="nav">
+			<a href="../index.html">home</a> |
+			<a href="../pages/LoopsHOME.html">back</a>
+		</div>
+	<script>
+		var output = document.getElementById('output');
+		
+		function tryVar(){
+			for(var i=0; i<10; i++){
+				
+			}
+			return i;
+		}
+
+		function tryLet(){
+			for(let i=0; i<=10; i++){
+			
+			}
+			//return i; here will throw an error because i is undefined.
+			//this is because 'let' changes the scope.
+		}
+	
+		output.innerHTML = "Var: "+tryVar()+"<br />Let: "+tryLet();
+		
+	</script>
+	</body>
+</html>
