@@ -1,37 +1,24 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Creating CSS3 Transitions</title>
-	<link href="../style.css" rel="stylesheet"/>
-	<script src="../data.js"></script>
-</head>
-<body>
-	<h1 id="title">tbd</h1>
-	<div id="linkListDiv">
-		<h3>Study Topics</h3>
-		<ol id="list">
-		</ol>
-	</div>
-	
-	<a href="../index.html">home</a>
-	
-<script>
-	window.onload = function(){
-		var page = 7;
-		document.getElementById('title').innerHTML = studyTopics[page][0]+" Home";
-		for(let l=0; l<studyTopics[page].length;l++){
-			let list = document.getElementById('list');
-			let li = document.createElement('li');
-			let anchor = document.createElement('a');
-			let text = document.createTextNode(studyTopics[page][l]);
-			let name = studyTopics[page][l];
-			let href = '../sandboxes/'+name+'.html';
-			anchor.setAttribute('href',href);
-			anchor.appendChild(text);
-			li.appendChild(anchor);
-			list.appendChild(li);
-		}
-	}
-</script>
-</body>
+<!DOCTYPE HTML>
+<html lang="en-us">
+	<head>
+		<title>transitions/Animations</title>
+		<link href="../style.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<h1>CSS3 Transitions and Animations Sandbox</h1>
+		<h3>Creating CSS3 Transitions and Animations in CSS and triggering them with JavaScript</h3>
+		<div>
+			view sources in the developer tools to see the code.<br />
+			view elements in the developer tools to see the resulting dom structure frome the code.<br />
+			code output can be seen below:<br /><br />
+		</div>
+		<div id="output">
+		</div>
+		<div class="nav">
+			<a href="../index.html">home</a>
+		</div>
+	<script>
+
+	</script>
+	</body>
 </html>

@@ -1,37 +1,86 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>DOM, etc</title>
-	<link href="../style.css" rel="stylesheet"/>
-	<script src="../data.js"></script>
-</head>
-<body>
-	<h1 id="title">tbd</h1>
-	<div id="linkListDiv">
-		<h3>Study Topics</h3>
-		<ol id="list">
-		</ol>
-	</div>
+<!DOCTYPE HTML>
+<html lang="en-us">
+	<head>
+		<title>DOM</title>
+		<link href="../style.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<h1>DOM Manipulation Sandbox</h1>
+		<h3>createElement, appendChild, insertBefore, removeChild, etc</h3>
+		<div>
+			view sources in the developer tools to see the code.<br />
+			view elements in the developer tools to see the resulting dom structure frome the code.<br />
+			code output can be seen below:<br /><br />
+		</div>
+		<div id="output">
+		</div>
+		<input type="button" id="removeP" value="remove paragraph" /><br />
+		<input type="text" id="pText" placeholder="change the paragraphs text" />
+		<input type="button" id="changeP" value="change paragraph" />
+		<div class="nav">
+			<a href="../index.html">home</a>
+		</div>
+	<script>
+	//createElement, appendChild, insertBefore, removeChild, etc
+	//set up output div that is already in the html above
+	var output = document.getElementById('output');
+	var buttonR = document.getElementById('removeP');
+	var buttonC = document.getElementById('changeP');
+	var input = document.getElementById('pText');
 	
-	<a href="../index.html">home</a>
+	//make a div with an attribute
+	var div = document.createElement('div');
+	var attr = document.createAttribute('sampleID');
+	attr.value = 'id: 7';
+	div.setAttributeNode(attr);
 	
-<script>
-	window.onload = function(){
-		var page = 5;
-		document.getElementById('title').innerHTML = studyTopics[page][0]+" Home";
-		for(let l=0; l<studyTopics[page].length;l++){
-			let list = document.getElementById('list');
-			let li = document.createElement('li');
-			let anchor = document.createElement('a');
-			let text = document.createTextNode(studyTopics[page][l]);
-			let name = studyTopics[page][l];
-			let href = '../sandboxes/'+name+'.html';
-			anchor.setAttribute('href',href);
-			anchor.appendChild(text);
-			li.appendChild(anchor);
-			list.appendChild(li);
+	//make a heading with a text node inside
+	var p = document.createElement('p');
+	var pnode = document.createTextNode('paragraph text');
+	p.appendChild(pnode);
+	
+	//add the heading to our div
+	div.appendChild(p);
+	output.appendChild(div);  //div > p > 'paragraph text'
+
+	//now add a heading before the paragraph
+	var h1 = document.createElement('h1');
+	var hnode = document.createTextNode('heading text');
+	h1.appendChild(hnode);
+	div.insertBefore(h1, p);
+	
+	function toggleP(){
+		if(buttonR.value == 'remove paragraph'){
+			div.removeChild(p);
+			buttonR.value = 'add paragraph';
+			buttonC.style.display = 'none';
+			input.style.display = 'none';
+		}
+		else{
+			div.appendChild(p);
+			buttonR.value = 'remove paragraph'; 
+			buttonC.style.display = 'inline-block';
+			input.style.display = 'inline-block';
 		}
 	}
-</script>
-</body>
+	
+	buttonR.addEventListener('click', toggleP);
+	
+	function changeP(){
+		let newPText = input.value;
+		let newNode = document.createTextNode(newPText);
+		let newP = document.createElement('p');
+		newP.appendChild(newNode);
+		div.replaceChild(newP, p);
+		p = newP;
+		input.value = '';
+	}
+	
+	buttonC.addEventListener('click', changeP);
+	
+	
+	
+	
+	</script>
+	</body>
 </html>

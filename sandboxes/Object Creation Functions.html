@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+	<head>
+		<title>Object Creation Functions</title>
+		<link href="../style.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<h1>Object Creation Functions Sandbox</h1>
+		<div>
+			view sources in the developer tools to see the code.<br />
+			code output can be seen below:<br /><br />
+		</div>
+		<div id="output">
+		</div>
+		<div class="nav">
+			<a href="../index.html">home</a> |
+			<a href="../pages/ObjectHOME.html">back</a>
+		</div>
+	<script>
+		var output = document.getElementById('output');
+		
+		function teamMember(firstName, lastName, age, city, state){
+			this.firstName = firstName;
+			this.lastName = lastName;
+			this.age = age;
+			this.city = city;
+			this.state = state;
+			this.getIntro = function(){
+				return 'Hi, my name is '+firstName+' '+lastName+' and I am '+age+' years old. I live in '+city+', '+state;
+			}
+		}
+		
+		var Jonathan = new teamMember("Jonathan", "Sirrine", 26, "Camano Island", "Washington");
+		
+		var node = document.createTextNode(Jonathan.getIntro());
+		output.appendChild(node);
+		
+		
+	</script>
+	</body>
+</html>

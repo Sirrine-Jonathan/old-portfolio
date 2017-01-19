@@ -19,30 +19,43 @@
 	<script>
 		var output = document.getElementById('output');
 		
-				var team = [
+		var grade = 'A+';
+		var team = [
 			"Tyler",
 			"Shanna-Mae",
 			"Janine",
 			"Jonathan"
 		];
 		
-		var team = [];
-		team['one'] = 'Tyler';
-		team['two'] = 'Shanna-Mae';
-		team['three'] = 'Janine';
-		team['four'] = 'Jonathan';
 		
+		var teamGrades = {};
 		
-		console.log(team); //in the console
-		var text = document.createTextNode(team); //but it will not show up when added to the dom like an array. 
-		output.appendChild(text);
-		
-		text = document.createTextNode(team['four']); //unless you specify the element that you want.
-		output.appendChild(text);
+		for(i=0; i < team.length; i++){
+			let member = team[i];
+			teamGrades[member] = grade;
+		}
+	
+		for(var member in teamGrades){
+			let text = document.createTextNode('key: '+member+', value: '+teamGrades[member]);
+			output.appendChild(text);
+			output.innerHTML += '<br />';
+		}
 		
 		output.innerHTML += '<br />';
-		text = document.createTextNode('Array length: '+team.length); //an associative array does not behave like an array because it is more like an object. 
-		output.appendChild(text);
+		//sad path
+		var teamErr = {};
+		for(e=0; e < team.length; e++){
+			let member = team[e];
+			teamErr.member = grade;
+		}
+		
+		for(var member in teamErr){
+			let text = document.createTextNode('key: '+member+', value: '+teamErr[member]);
+			output.appendChild(text);
+			output.innerHTML += '<br />';
+		}
+
+		
 
 		
 	</script>

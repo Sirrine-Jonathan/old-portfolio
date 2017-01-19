@@ -11,5 +11,5 @@ const studyTopics = [
 	["Video", "Audio", "Canvas"],
 	["CSS3Transitions (Designing, Defining, and Triggering without Custom Libraries--Thought Library)"],
 	["CSS3Transforms (Designing, Defining, and Triggering without Custom Libraries--Thought Library)"],
-	["CSS3Animations (Designing, Defining, and Triggering without Custom Libraries--Thought Library)"],
+	["CSS3Animations (Designing, Defining, and Triggering without Custom Libraries--Thought Library)"]
 ];
