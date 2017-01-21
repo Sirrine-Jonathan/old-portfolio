@@ -26,11 +26,11 @@
 			let li = document.createElement('li');
 			let anchor = document.createElement('a');
 			
-			if(l === 2 || l === 3){
-				name = nameFix+studyTopics[page][l];
+			if(l === 0 || l === 1 ){
+				name = studyTopics[page][l];
 			}
 			else{
-				name = studyTopics[page][l];
+				name = nameFix+studyTopics[page][l];
 			}
 			let text = document.createTextNode(name);
 			let href = '../sandboxes/'+name+'.html';

@@ -3,22 +3,184 @@
 	<head>
 		<title>transitions/Animations</title>
 		<link href="../style.css" rel="stylesheet"/>
+		<style>
+			h3 {
+				display:inline-block;
+				width:48%;
+			}
+			
+			.inputDiv {
+				display:inline-block;
+				width:48%;
+			}
+		
+			#transition {
+				display:inline-block;
+				height:400px;
+				width:48%;
+				border:1px solid white;
+			}
+			
+			#animation {
+				display:inline-block;
+				height:400px;
+				width:48%;
+				border:1px solid white;
+				float:right;
+			}
+		
+			.sphere {
+				position:relative;
+				display:inline-block;
+				width:50px;
+				height:50px;
+				border-radius:50%;
+				border:1px solid blue;
+				background-color:blue;
+			}
+			
+			.block {
+				display:inline-block;
+				width:50px;
+				height:50px;
+				margin-left:50px;
+				background-color:red;
+			}
+			
+			.rotate {
+				animation-duration: 5s;
+				animation-direction: alternate;
+				animation-name: rotate;
+				animation-timing-function: linear;
+				animation-iteration-count: infinite;
+			}
+			
+			@keyframes rotate {
+				0% {
+					top:350px;
+					left:0px;
+					background-color:blue
+					border:1px solid blue;
+					}
+					
+				50% {
+					background-color:black;
+					border:1px solid white;
+				}
+				
+				100% {
+					top:350px;
+					left:90%;
+					background-color:red;
+					border:1px solid red;
+				}
+			}
+			
+			.drop {
+				transition-duration: 8.448525755274977s;
+				transition-timing-function: ease-in;
+				margin-top:350px;
+			}
+			
+		</style>
 	</head>
 	<body>
 		<h1>CSS3 Transitions and Animations Sandbox</h1>
 		<h3>Creating CSS3 Transitions and Animations in CSS and triggering them with JavaScript</h3>
-		<div>
-			view sources in the developer tools to see the code.<br />
-			view elements in the developer tools to see the resulting dom structure frome the code.<br />
-			code output can be seen below:<br /><br />
+	
+		<blockquote cite="https://css-tricks.com/controlling-css-animations-transitions-javascript/">
+		"<em>Transitions</em> in CSS are applied to an element and specify that when a property changes it should do so over gradually over a period of time.<br /><br />
+		<em>Animations</em> are different. When applied, they just run and do their thing. They offer more fine-grained control as you can control different stops of the animations."
+		<br /><br />
+		<cite>https://css-tricks.com/controlling-css-animations-transitions-javascript/</cite>
+		</blockquote>
+		<h3>Transition:</h3>
+		<h3 style="float:right">Animation:</h3>
+		<div id="transition">
+			<div class="block"></div>
 		</div>
-		<div id="output">
+		<div id="animation">
+			<div class="sphere rotate"></div>
 		</div>
+		<br />
+		<div class="inputDiv">
+			<input type="button" id="blockButton" value="play" />
+		</div>
+		
 		<div class="nav">
 			<a href="../index.html">home</a>
 		</div>
 	<script>
-
+	var transition = document.getElementById('transition');
+	var block = document.getElementsByClassName('block')[0];
+	var bbutton = document.getElementById('blockButton');
+	var css = document.styleSheets[1];
+	bbutton.addEventListener('click', drop);
+	
+	function drop(){
+		if(this.value == 'play'){
+			this.value = 'pause';
+			
+			//get current marginTop
+			let computedStyle = window.getComputedStyle(block);
+			let marginTop = computedStyle.getPropertyValue('margin-top');
+	
+			//make edits to drop class
+			let speed = getFallTime(marginTop)+'s';
+			css.removeRule(css.cssRules.length - 1);
+			let newRule = ".drop { transition-duration: "+speed+"; transition-timing-function: ease-in; margin-top: 350px !important; }";
+			css.insertRule(newRule, css.cssRules.length);
+	
+			//add class
+			block.classList.add('drop');
+			let dropper = document.getElementsByClassName('drop')[0];
+			dropper.addEventListener('transitionend', function(){
+				bbutton.value = 'done';
+			});
+		}
+		else if(this.value == 'pause'){
+			this.value = 'play';
+			var computedStyle = window.getComputedStyle(block);
+			var marginTop = computedStyle.getPropertyValue('margin-top');
+			block.style.marginTop = marginTop;
+			block.classList.remove('drop');  
+		}
+		else if(this.value == 'done'){
+			this.value = "that's it";
+		}
+		else if(this.value == "that's it"){
+			this.style.display = 'none';
+		}
+	}
+	
+	function getFallTime(marginTop){
+		let fallDistance = 350 - parseFloat(marginTop);
+		let distance = fallDistance * 0.1;
+		gravity = 9.807;
+		let time = Math.sqrt(2 * distance / gravity);
+		return time;
+	}
+	</script>
+	<script>
+	var startButton = document.getElementById('sphereButton');
+	var sphere = document.getElementsByClassName('sphere')[0];
+	console.log(sphere);
+	startButton.addEventListener('click', function(){
+		if(this.value == 'start'){
+			this.value = 'stop';
+			sphere.classList.add('color');
+			sphere.classList.add('rotate');
+		}
+		else{
+			this.value = 'start';
+			var computedStyle = window.getComputedStyle(sphere);
+			console.log(computedStyle);
+			sphere.style = computedStyle;
+			sphere.classList.remove('color');
+			sphere.classList.remove('rotate');
+		}
+	});
+	
 	</script>
 	</body>
 </html>

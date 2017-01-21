@@ -1,37 +1,162 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Mobil Events</title>
-	<link href="../style.css" rel="stylesheet"/>
-	<script src="../data.js"></script>
-</head>
-<body>
-	<h1 id="title">tbd</h1>
-	<div id="linkListDiv">
-		<h3>Study Topics</h3>
-		<ol id="list">
-		</ol>
-	</div>
+<!DOCTYPE HTML>
+<html lang="en-us">
+	<head>
+		<title>Events</title>
+		<link href="../style.css" rel="stylesheet"/>
+		<style>
+			#square {
+				display:inline-block;
+				width:150px;
+				height:150px;
+				background-color: grey;
+				vertical-align:top;
+			}
+			
+			#innerSquare {
+				display:inline-block;
+				width:50px;
+				height:50px;
+				background-color: black;
+				margin:10px 0 0 10px;
+			}
+			
+			canvas {
+				height:200px;
+				width: 90%;
+				background-color: white;
+			}
+			
+			#mouseevents, #keyboardevents {
+				display:inline-block;
+				vertical-align:top;
+				margin:0 auto;
+			}
+			
+			#textbox {
+				display:inline-block;
+				height:140px;
+				width:80%;
+				vertical-align:top;
+				line-height:100%;
+				font-size:4.5em;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<!--INFORMATION-->
+		<h1>Javascript Events Sandbox</h1>
+		<h3>Standard JavaScript Events Including those for Mobile Devices ( Ex. onTouchBegin, onLoad, etc.) and Animation and Transition Events Home</h3>
+		<h4>Standard Javascript Events:</h4>
+		
+		<!--STANDARDE EVENTS-->
+		<div id='events'>
+		<ul id='mouseevents'><u>Mouse Events:</u>
+			<li>click + ctrl</li>
+		</ul>
+		<ul id="keyboardevents"><u>Keyboard Events:</u>
+		</ul>
+		</div>
+		
+		<p>Current Event: <span id='feed'></span></>
+		<div id="inputArea">
+		<div id="square">
+			<div id="innerSquare"></div>
+		</div>
+		<input type="textarea" id='textbox' placeholder='Type here'/>
+		</div>
+		
+		
+		<h4>Mobile Javascript Events:</h4>
+		
+		<!--MOBILE EVENTS-->
+		<ul id="mobileevents"><u>Mobile Events:</u>
+		</ul>
+		<p>Current Event: <span id='feed2'></span></>
+		<p>Touch List: <span id="touchListFeed"></span></p>
+		
+		<canvas>
+		
+		</canvas>
+		
+		
+		
+		<div class="nav">
+			<a href="../index.html">home</a>
+		</div>
+	<script>
 	
-	<a href="../index.html">home</a>
-	
-<script>
-	window.onload = function(){
-		var page = 8;
-		document.getElementById('title').innerHTML = studyTopics[page][0]+" Home";
-		for(let l=0; l<studyTopics[page].length;l++){
-			let list = document.getElementById('list');
+	/*CODE FOR STANDARD EVENTS*/
+		var square = document.getElementById('square');
+		var rect = document.getElementById('rect');
+		var feed = document.getElementById('feed');
+		var mlist = document.getElementById('mouseevents');
+		var klist = document.getElementById('keyboardevents');
+		var toggle = true;
+		var toggle2 = true;
+		var color = 'blue';
+		
+		//DISPLAY CURRENT EVENT & POPULATE LIST
+		var mouseevents = ['click', 'mouseenter', 'mouseover', 'mouseleave', 'mouseout', 'dblclick', 'mouseup', 'mousedown', 'wheel'];
+		mouseevents.forEach(function(item){
+			square.addEventListener(item, function(e){
+				feed.innerHTML = e.type;
+			});
 			let li = document.createElement('li');
-			let anchor = document.createElement('a');
-			let text = document.createTextNode(studyTopics[page][l]);
-			let name = studyTopics[page][l];
-			let href = '../sandboxes/'+name+'.html';
-			anchor.setAttribute('href',href);
-			anchor.appendChild(text);
-			li.appendChild(anchor);
-			list.appendChild(li);
-		}
-	}
-</script>
-</body>
+			let text = document.createTextNode(item);
+			li.appendChild(text);
+			mlist.appendChild(li);
+		});
+		
+		//MAKE SQUARE DIV INTERACTIVE
+		square.addEventListener('click', function(e){
+			if(e.ctrlKey){
+				if(toggle2){
+					color = 'red';
+					toggle2 = false;
+				}else{
+					color = 'blue';
+					toggle2 = true;
+				}
+			}
+			if(toggle){
+				this.style.backgroundColor = color;
+				toggle = false;
+			}else{
+				this.style.backgroundColor = 'grey';
+				toggle = true;
+			}
+		});
+		
+		var keyboardevents = ['keydown', 'keypress','keyup'];
+		keyboardevents.forEach(function(item){
+			document.addEventListener(item, function(e){
+				feed.innerHTML = e.type +' : '+ e.key;
+			});
+			let li = document.createElement('li');
+			let text = document.createTextNode(item);
+			li.appendChild(text);
+			klist.appendChild(li);
+		});
+		
+		
+	/*CODE FOR MOBILE EVENTS*/
+	var touchevents = ['touchcancel','touchend','touchmove','touchstart'];
+	var canvas = document.getElementsByTagName('canvas')[0];
+	var plist = document.getElementById('mobileevents');
+	var touchList = document.getElementById('touchListFeed');
+	touchevents.forEach(function(item){
+		canvas.addEventListener(item, function(e){
+			feed2.innerHTML = e.type;
+			touchList.innerHTML = e.changedTouches.length;
+		});
+		let li = document.createElement('li');
+		let text = document.createTextNode(item);
+		li.appendChild(text);
+		plist.appendChild(li);
+	});
+		
+
+	</script>
+	</body>
 </html>
