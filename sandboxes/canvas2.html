@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+	<head>
+		<title>canvas</title>
+		<link href="../style.css" rel="stylesheet"/>
+	<style>
+		canvas {
+			background-color:white;
+		}
+	</style>
+	</head>
+	<body>
+		<h1>Canvas Sandbox</h1>
+		<h4>event</h4>
+		<canvas></canvas>
+
+		
+		<div class="nav">
+			<a href="../index.html">home</a> |
+			<a href="../pages/LoopsHOME.html">back</a>
+		</div>
+	<script>
+		window.scroll = 'disabled';
+		console.log(window);
+		var canvas = document.getElementsByTagName('canvas')[0];
+		var h4 = document.getElementsByTagName('h4')[0];
+		var canvasObj = document.getElementsByTagName('canvas');
+		for(canvas in canvasObj){
+		if(!isNaN(canvas)){
+			var events = ['touchcancel','touchend','touchmove','touchstart'];
+			events.forEach(function(item){
+				canvasObj[canvas].addEventListener(item, function(e){
+					h4.innerHTML = e.type;
+					var ctx = this.getContext('2d');
+					switch(e.type){
+						case 'touchstart':
+							getXY(e, start, ctx, this);
+						break;
+						case 'touchmove':
+							html = getXY(e, move, ctx, this);
+						break;
+						case 'touchend':
+							ctx.stroke();
+						break;
+						case 'touchcancel':
+						
+						break;
+						default:
+							console.log('default action called: '+e.type+' was passed through the switch');
+						
+					}
+				});
+			});
+		}
+		}
+		
+		//gets and passes into a function the xy coordinates of the touch event
+		function getXY(event, fn, context, element){
+			let arr = [];
+			let obj = event.targetTouches;
+			for(touch in obj){
+				if(!isNaN(touch)){
+					let innerArr = [];
+					/*
+						clientX
+						pageX
+						screenX
+					*/
+					var offsets = getOffset(element);
+					innerArr.push(obj[touch].pageX - offsets.offsetLeft);
+					innerArr.push(obj[touch].pageY - offsets.offsetTop);
+					arr.push(innerArr);
+				}
+			}
+			
+			arr.forEach(function(innArr){
+				fn(innArr[0], innArr[1], context);
+			});
+		}
+		
+		function start(x, y, context){
+			context.beginPath();
+			context.moveTo(x,y);
+		}
+		
+		function move(x, y, context){
+			context.lineTo(x, y);
+		}
+		
+		function getOffset(ele) {
+			var offsetLeft = 0;
+			var offsetTop = 0;
+			while (ele) {
+				offsetLeft += ele.offsetLeft;
+				offsetTop += ele.offsetTop;
+				ele = ele.offsetParent;
+			};
+			return {
+				offsetLeft: offsetLeft,
+				offsetTop: offsetTop
+			};
+		};
+	</script>
+	</body>
+</html>

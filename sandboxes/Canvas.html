@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+	<head>
+		<title>canvas</title>
+		<link href="../style.css" rel="stylesheet"/>
+	<style>
+		canvas {
+			background-color:white;
+		}
+	</style>
+	</head>
+	<body>
+		<h1>Canvas Sandbox</h1>
+		<h4 id="ev">event</h4>
+		<canvas id="canvas">Message for those whose browsers do not support canvas</canvas><br />
+		<input type="button" id="clear" value="clear" />
+		
+		<div class="nav">
+			<a href="../index.html">home</a> |
+			<a href="../pages/VideoHOME.html">back</a>
+		</div>
+	<script>
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+		var ev = document.getElementById('ev');
+		var clear = document.getElementById('clear');
+		var mouseDown = false;
+		
+		clear.addEventListener('click', function(){
+			canvas.width = canvas.width;
+		});
+		
+		var events = ['touchend','touchmove','touchstart', 'mousedown', 'mouseup'];
+		events.forEach(function(item){
+			canvas.addEventListener(item, function(e){
+				ev.innerHTML = e.type;
+				switch(e.type){
+					case 'touchstart':
+						getXY(e, start);
+					break;
+					case 'touchmove':
+						getXY(e, move);
+					break;
+					case 'touchend':
+						ctx.stroke();
+					break;
+					case 'mousedown':
+						start(e.x, e.y);
+						canvas.addEventListener('mousemove', function(e){
+							ev.innerHTML = e.type;
+							move(e.x, e.y);
+						});
+					break;
+					case 'mouseup':
+						ctx.stroke();
+						canvas.removeEventListener('mousemove', function(e){
+							ev.innerHTML = e.type;
+							move(e.x, e.y);
+						});
+					break;
+				}
+			});
+		});
+		
+		//gets and passes into a function the xy coordinates of the touch event
+		function getXY(event, fn){
+			let arr = [];
+			let obj = event.targetTouches;
+			for(touch in obj){
+				if(!isNaN(touch)){
+					let innerArr = [];
+					var offsets = getOffset(canvas);
+					innerArr.push(obj[touch].pageX - offsets.offsetLeft);
+					innerArr.push(obj[touch].pageY - offsets.offsetTop);
+					arr.push(innerArr);
+				}
+			}
+			
+			arr.forEach(function(innArr){
+				fn(innArr[0], innArr[1]);
+			});
+		};
+		
+		function getMouseXY(event, fn){
+			console.log(event);
+		}
+		
+		function start(x, y){
+			ctx.beginPath();
+			ctx.moveTo(x,y);
+		}
+		
+		function move(x, y){
+			ctx.lineTo(x, y);
+		}
+		
+		function getOffset(ele) {
+			var offsetLeft = 0;
+			var offsetTop = 0;
+			while (ele) {
+				offsetLeft += ele.offsetLeft;
+				offsetTop += ele.offsetTop;
+				ele = ele.offsetParent;
+			};
+			return {
+				offsetLeft: offsetLeft,
+				offsetTop: offsetTop
+			};
+		};
+		
+	</script>
+	</body>
+</html>
