@@ -4,6 +4,9 @@
 		<title>canvas</title>
 		<link href="../style.css" rel="stylesheet"/>
 	<style>
+		body {
+			overflow:hidden;
+		}
 		canvas {
 			background-color:white;
 		}
@@ -11,29 +14,135 @@
 	</head>
 	<body>
 		<h1>Canvas Sandbox</h1>
+		<div>
+			Use the buttons and inputs to draw on the 300x150 canvas. 
+			You can also draw with your finger on touch screen devices
+			and by clicking and dragging with the mouse.
+		</div>
 		<h4 id="ev">event</h4>
-		<canvas id="canvas">Message for those whose browsers do not support canvas</canvas><br />
-		<input type="button" id="clear" value="clear" />
+		<h4 id="xy">x, y</h4>
 		
+		<!-- HTML Element with default innerHTML-->
+		<canvas id="canvas">Message for those whose browsers do not support canvas</canvas><br />
+		
+		<!-- buttons that will run some functions -->
+		<input type="button" id="clear" value="clear" />
+		<br />
+		<label>Start</label>
+		<input type="number" id="startx" min="0" placeholder="start x" />
+		<input type="number" id="starty" min="0" placeholder="start y" />
+		<input type="number" id="starta" placeholder="start a" />
+		<br />
+		<label>Stop</label>
+		<input type="number" id="stopx" min="0" placeholder="stop x" />
+		<input type="number" id="stopy" min="0" placeholder="stop y" />	
+		<input type="number" id="stopa" placeholder="stop a" />
+		<br />
+		<input type="button" id="drawLine" value="draw line" />
+		<input type="button" id="drawRect" value="draw rect" />
+				<input type="number" id="radius" placeholder="radius" />
+		<input type="button" id="arc" value="arc" />
 		<div class="nav">
 			<a href="../index.html">home</a> |
 			<a href="../pages/VideoHOME.html">back</a>
 		</div>
 	<script>
+		//displays
+		var ev = document.getElementById('ev');
+		var xy = document.getElementById('xy');
+		
+		//mouse event toggle
+		var mouseDown = false;
+		
+		//get canvas element then get context
 		var canvas = document.getElementById('canvas');
 		var ctx = canvas.getContext('2d');
-		var ev = document.getElementById('ev');
+		
+		//get html for buttons
 		var clear = document.getElementById('clear');
-		var mouseDown = false;
+		var drawLine = document.getElementById('drawLine');
+		var drawRect = document.getElementById('drawRect');
+		var arc = document.getElementById('arc');
+		
+		//get html for inputs
+		var startx = document.getElementById('startx');
+		var starty = document.getElementById('starty');
+		var starta = document.getElementById('starta');
+		var stopx = document.getElementById('stopx');
+		var stopy = document.getElementById('stopy');
+		var stopa = document.getElementById('stopa');
+		var radius = document.getElementById('radius');
+		
+		//render max and mins
+		var maxWidth = document.createAttribute('max');
+		var maxHeight = document.createAttribute('max');
+		maxWidth.value = canvas.width;
+		maxHeight.value = canvas.height;
+		
+		startx.setAttributeNode(maxWidth);
+		stopx.setAttributeNode(maxWidth.cloneNode());
+		starty.setAttributeNode(maxHeight);
+		stopy.setAttributeNode(maxHeight.cloneNode());
+		
+		
+		///////////////////////////////////////////////
+		/*            BUTTON EVENT LISTENERS         */
+		///////////////////////////////////////////////
+		
+		drawLine.addEventListener('click', function(){
+			ctx.beginPath();
+			ctx.moveTo(startx.value, starty.value);
+			ctx.lineTo(stopx.value, stopy.value);
+			ctx.stroke();//  closePath fill 
+			reset();
+		});
+		
+		drawRect.addEventListener('click', function(){
+			ctx.strokeRect(startx.value, starty.value, stopx.value, stopy.value); //fillRect  clearRect
+			reset();
+		});
+		
+		arc.addEventListener('click', function(){
+			let radiansa = (Math.PI/180)*starta.value;
+			let radiansb = (Math.PI/180)*stopa.value;
+			ctx.beginPath();
+			ctx.arc(startx.value, starty.value, radius.value, radiansa, radiansb, true);
+			ctx.stroke();
+		});
+		
+		
+		
+		function reset(){
+			startx.value = stopx.value;
+			starty.value = stopy.value;
+			stopx.value = '';
+			stopy.value = '';
+			stopx.focus();
+		}
 		
 		clear.addEventListener('click', function(){
 			canvas.width = canvas.width;
+			let eleArr = document.getElementsByTagName('input');
+			for(ele in eleArr){
+				if(eleArr[ele].type === 'number'){
+					eleArr[ele].value = '';
+				}
+			};
 		});
 		
+		
+		
+		///////////////////////////////////////////////
+		/*           MOUSE AND TOUCH EVENTS          */
+		///////////////////////////////////////////////
+		
+		//events
 		var events = ['touchend','touchmove','touchstart', 'mousedown', 'mouseup'];
 		events.forEach(function(item){
+		
+			//add event listener for each event
 			canvas.addEventListener(item, function(e){
-				ev.innerHTML = e.type;
+				ev.innerHTML = e.type; 
 				switch(e.type){
 					case 'touchstart':
 						getXY(e, start);
@@ -45,18 +154,20 @@
 						ctx.stroke();
 					break;
 					case 'mousedown':
-						start(e.x, e.y);
-						canvas.addEventListener('mousemove', function(e){
+						console.log(e.x);
+						ctx.beginPath();
+						ctx.moveTo(e.x - e.target.offsetLeft,e.y - e.target.offsetTop);
+						canvas.onmousemove = function(e){
 							ev.innerHTML = e.type;
-							move(e.x, e.y);
-						});
+							xy.innerHTML = (e.x - e.target.offsetLeft)+', '+(e.y - e.target.offsetTop);
+							ctx.lineTo(e.x - e.target.offsetLeft, e.y - e.target.offsetTop);
+							canvas.style.cursor = "default";
+						};
 					break;
 					case 'mouseup':
 						ctx.stroke();
-						canvas.removeEventListener('mousemove', function(e){
-							ev.innerHTML = e.type;
-							move(e.x, e.y);
-						});
+						canvas.onmousemove = null;
+						canvas.style.cursor = "default";
 					break;
 				}
 			});
@@ -85,15 +196,18 @@
 			console.log(event);
 		}
 		
+		//touch event draw functions
 		function start(x, y){
 			ctx.beginPath();
 			ctx.moveTo(x,y);
 		}
 		
 		function move(x, y){
+			xy.innerHTML = x+', '+y;
 			ctx.lineTo(x, y);
 		}
 		
+		//function used to get the offset of the canvas element on the page
 		function getOffset(ele) {
 			var offsetLeft = 0;
 			var offsetTop = 0;

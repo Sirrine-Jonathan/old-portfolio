@@ -3,18 +3,77 @@
 	<head>
 		<title>Video</title>
 		<link href="../style.css" rel="stylesheet"/>
+		<style>
+			#display {
+				width:530px;
+			}
+		</style>
 	</head>
 	<body>
 		<h1>Video Sandbox</h1>
-		<div id="output">
-		
+		<video controls="controls" height="300" preload="auto" id="video">
+			<source src="video/jon and rochelle.MP4" />
+		</video>
+		<div id="display">
+		<span>Stopped to load: <span id="count">0</span></span>
+		<span style="float:right">Playback Speed: <span id="speed">1.0</span></span>
 		</div>
+		
+		<input type="button" id="slower" value="slower" />
+		<input type="button" id="faster" value="faster" />
+		<input type="button" id="normal" value="normal" />
 		<div class="nav">
 			<a href="../index.html">home</a> |
 			<a href="../pages/VideoHOME.html">back</a>
 		</div>
 	<script>
-
+		//variables
+		var video = document.getElementById('video');
+		var countDisplay = document.getElementById('count');
+		var speedDisplay = document.getElementById('speed');
+		var faster = document.getElementById('faster');
+		var slower = document.getElementById('slower');
+		var normal = document.getElementById('normal');
+		var curRate = video.playbackRate;
+		var count = 0;
+		
+		
+		video.load();
+		video.addEventListener('canplaythrough',function(){
+			video.play();
+		});
+		video.loop = true;
+		video.addEventListener('waiting', function(){
+			count++;
+			countDisplay.innerHTML = count;
+		});
+		
+		slower.addEventListener('click', function(){
+			
+			//decrease playback speed
+			//this conditional sets the min speed
+			if(curRate > -2.0){
+				video.playbackRate = parseFloat(curRate) - 0.5;
+				curRate = video.playbackRate.toFixed(2);
+			}
+			speedDisplay.innerHTML = video.playbackRate.toFixed(2);
+		});
+		
+		faster.addEventListener('click', function(){
+			//increase playback speed
+			//this conditional sets the max speed
+			if(curRate < 2.0){
+				video.playbackRate = parseFloat(curRate) + 0.5;
+				curRate = video.playbackRate.toFixed(2);
+			}
+			speedDisplay.innerHTML = video.playbackRate.toFixed(2);
+		});
+		
+		normal.addEventListener('click', function(){
+			video.playbackRate = 1.0;
+			curRate = 1.0;
+			speedDisplay.innerHTML = video.playbackRate.toFixed(2);
+		});
 	</script>
 	</body>
 </html>

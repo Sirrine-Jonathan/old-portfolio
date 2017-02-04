@@ -1,0 +1,337 @@
+commit ac9da0a7e7ee10a01c5e83dadd6911e3e3c63e79
+Merge: f89ab9c cc80e3b
+Author: Jonathan <Enirrisky@gmail.com>
+Date:   Sun Feb 5 04:43:17 2017 -0800
+
+    Merge branch 'master' of github.com:Sirrine-Jonathan/Sirrine-Jonathan.github.io
+
+commit cc80e3ba238a815752ec0353b3028b45e03fb421
+Author: Jonathan <Enirrisky@gmail.com>
+Date:   Sat Feb 4 02:45:36 2017 -0800
+
+    amending old commit
+
+commit 6d03707f62185648b320123e73208e82fb788fad
+Author: Jonathan <Enirrisky@gmail.com>
+Date:   Sat Feb 4 02:23:51 2017 -0800
+
+    first commit after rebase
+
+commit f89ab9caf1dfdb34c1ff044c0a778ce1b412ca00
+Author: Jonathan <Enirrisky@gmail.com>
+Date:   Sat Feb 4 02:45:36 2017 -0800
+
+    amending old commit
+
+commit e92bcbaa39ca26a09cbd0f393d80cfa6c422afc8
+Author: Jonathan <Enirrisky@gmail.com>
+Date:   Sat Feb 4 02:44:25 2017 -0800
+
+    removed large files
+
+ pages/LocalHOME2.html          | 320 -----------------------------------------
+ sandboxes/audio/musical001.mp3 | Bin 13373 -> 0 bytes
+ sandboxes/audio/musical001.wav | Bin 16738 -> 0 bytes
+ 3 files changed, 320 deletions(-)
+
+commit c4b1b32285b21dfe218f231371e249b166779287
+Author: Jonathan <Enirrisky@gmail.com>
+Date:   Sat Feb 4 02:23:51 2017 -0800
+
+    removed audio file
+
+ sandboxes/audio/cit261.m4a | Bin 346287 -> 0 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 4047adb3c7b0f2313b3829a9a0622f32c7542e26
+Merge: 0f1be41 3e10dba
+Author: Jonathan <Enirrisky@gmail.com>
+Date:   Sat Feb 4 02:04:05 2017 -0800
+
+    removed large files
+
+commit 0f1be413ce8fd919e92a6a872f87388314fe31a5
+Author: Jonathan <Enirrisky@gmail.com>
+Date:   Fri Feb 3 23:36:22 2017 -0800
+
+    added a few more sandboxes with some duplicates
+
+ .gitignore                            |   3 +-
+ pages/CreatingHOME.html               |  49 +++++-
+ pages/LocalHOME.html                  |  62 +++----
+ pages/LocalHOME2.html                 | 320 ++++++++++++++++++++++++++++++++++
+ pages/VideoHOME.html                  |   2 +-
+ progress.html                         |  26 +--
+ sandboxes/Associative Arrays.html     |   8 +
+ sandboxes/Audio.html                  |  56 ++++++
+ sandboxes/Canvas.html                 | 231 ++++++++++++++++++++++++
+ sandboxes/Conditional Statements.html |  18 +-
+ sandboxes/Variables.html              | 100 ++++++++++-
+ sandboxes/Video.html                  |  79 +++++++++
+ sandboxes/audio/cit261.m4a            | Bin 0 -> 346287 bytes
+ sandboxes/audio/musical001.mp3        | Bin 0 -> 13373 bytes
+ sandboxes/audio/musical001.wav        | Bin 0 -> 16738 bytes
+ sandboxes/canvas2.html                | 105 +++++++++++
+ sandboxes/video/best one.MP4          | Bin 0 -> 808383966 bytes
+ sandboxes/video/jon and rochelle.MP4  | Bin 0 -> 37073057 bytes
+ 18 files changed, 998 insertions(+), 61 deletions(-)
+
+commit 3e10dbaa0ffdf03db965b002a4e98bee762d8fd9
+Author: Jonathan <Enirrisky@gmail.com>
+Date:   Sun Jan 29 23:37:34 2017 -0800
+
+    added 2 more sandboxes
+
+ pages/VideoHOME.html                  |   2 +-
+ sandboxes/Audio.html                  |  20 ++++++
+ sandboxes/Canvas.html                 | 113 ++++++++++++++++++++++++++++++++++
+ sandboxes/Conditional Statements.html |   2 +-
+ sandboxes/Video.html                  |  20 ++++++
+ sandboxes/canvas2.html                | 105 +++++++++++++++++++++++++++++++
+ 6 files changed, 260 insertions(+), 2 deletions(-)
+
+commit 39f9f30902d1d2c6cca709709ae9a3d0cd24c659
+Author: Jonathan <Enirrisky@gmail.com>
+Date:   Fri Jan 20 22:40:00 2017 -0800
+
+    progress update
+
+ progress.html | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit b32310c254839aff2af20845231e021dc5d3449f
+Author: Jonathan <Enirrisky@gmail.com>
+Date:   Fri Jan 20 22:32:47 2017 -0800
+
+    added a sandbox
+
+ pages/StandardHOME.html | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+commit 853b690b6366a159fe3f3148b6cd146efe40bb3e
+Author: Jonathan <Enirrisky@gmail.com>
+Date:   Fri Jan 20 22:26:14 2017 -0800
+
+    replaced homepage title
+
+ index.html | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit dc9122a8f18f82993080cdd68f9de8a052aae48b
+Author: Jonathan <Enirrisky@gmail.com>
+Date:   Fri Jan 20 22:24:49 2017 -0800
+
+    progress update
+
+ progress.html | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit 47d8d766089b2dd94df075c58ae5c5ac85bb7254
+Author: Jonathan <Enirrisky@gmail.com>
+Date:   Fri Jan 20 22:08:36 2017 -0800
+
+    added progress page and two sandboxes
+
+ index.html              |   2 +-
+ pages/CreatingHOME.html | 174 +++++++++++++++++++++++++++++++++++++++++--
+ pages/DOMHOME.html      |   5 +-
+ pages/LocalHOME.html    |   6 +-
+ pages/StandardHOME.html | 193 +++++++++++++++++++++++++++++++++++++++---------
+ progress.html           |  28 +++++++
+ 6 files changed, 360 insertions(+), 48 deletions(-)
+
+commit b74cd7d9841a3a218339d21c7ae2856a18bf1f76
+Author: Jonathan <Enirrisky@gmail.com>
+Date:   Thu Jan 19 07:44:20 2017 -0800
+
+    finished two sandboxes
+
+ data.js                                  |   2 +-
+ index.html                               |   2 +-
+ pages/CreatingHOME.html                  |  59 ++++++--------
+ pages/DOMHOME.html                       | 117 ++++++++++++++++++++--------
+ pages/LocalHOME.html                     |  14 +++-
+ progress.html                            | 128 +++++++++++++++++++++++++++++++
+ sandboxes/Associative Arrays.html        |  41 ++++++----
+ sandboxes/Object Creation Functions.html |  41 ++++++++++
+ 8 files changed, 316 insertions(+), 88 deletions(-)
+
+commit a94b796458a61cd42696fb0fbde26a88453e627e
+Author: Jonathan <Enirrisky@gmail.com>
+Date:   Thu Jan 12 00:16:41 2017 -0800
+
+    Made changes to all first category topics
+
+ index.html                            |  2 ++
+ sandboxes/Arrays.html                 | 64 +++++++++++++++++++++++++++++++++++
+ sandboxes/Associative Arrays.html     | 52 ++++++++++++++++++----------
+ sandboxes/Conditional Statements.html | 28 ++++++++-------
+ sandboxes/Functions.html              | 34 +++++++++++++++++++
+ sandboxes/Loops.html                  | 36 ++++++++++----------
+ sandboxes/Parameters.html             | 31 +++++++++++++++++
+ sandboxes/Variables.html              | 41 ++++++++++++++++++++++
+ 8 files changed, 241 insertions(+), 47 deletions(-)
+
+commit ef7e06cbf67dd5911f7809570c3bb74fdea3d855
+Author: Jonathan <Enirrisky@gmail.com>
+Date:   Tue Jan 10 23:16:14 2017 -0800
+
+    added three sandbox files
+
+ sandboxes/Associative Arrays.html     | 34 ++++++++++++
+ sandboxes/Conditional Statements.html | 39 ++++++++++++++
+ sandboxes/Loops.html                  | 97 ++++++++++++++++-------------------
+ style.css                             |  8 +++
+ 4 files changed, 125 insertions(+), 53 deletions(-)
+
+commit a3f636f44a3dd47b6dbc36473e7719177e8c7d2f
+Author: Jonathan <Enirrisky@gmail.com>
+Date:   Tue Jan 10 20:54:18 2017 -0800
+
+    changed 404 return link
+
+ 404.html | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 8308feb4049517c5208a3bd1e13d0b7855865841
+Author: Jonathan <Enirrisky@gmail.com>
+Date:   Tue Jan 10 20:52:21 2017 -0800
+
+    changed folder location
+
+ pages/CSS3AnimationsHOME.html  |  2 +-
+ pages/CSS3TransformsHOME.html  |  2 +-
+ pages/CSS3TransitionsHOME.html |  2 +-
+ pages/CreatingHOME.html        |  2 +-
+ pages/DOMHOME.html             |  2 +-
+ pages/JSONHOME.html            |  2 +-
+ pages/LocalHOME.html           |  2 +-
+ pages/LoopsHOME.html           |  2 +-
+ pages/ManipulatingHOME.html    |  2 +-
+ pages/ObjectHOME.html          |  2 +-
+ pages/StandardHOME.html        |  2 +-
+ pages/UsingHOME.html           |  2 +-
+ pages/VideoHOME.html           |  2 +-
+ sandboxes/Loops.html           | 75 ++++++++++++++++++++++++++++++++++++++++++
+ 14 files changed, 88 insertions(+), 13 deletions(-)
+
+commit dff8e086ef58ae815f70015142a29dc50240e430
+Author: Jonathan <sir15004@byui.edu>
+Date:   Tue Jan 10 20:45:56 2017 -0800
+
+    Delete loops.html
+
+ pages/sandboxes/loops.html | 75 ----------------------------------------------
+ 1 file changed, 75 deletions(-)
+
+commit f0bd899675f8d8e675bc096146c0ac1447f91bab
+Author: Jonathan <Enirrisky@gmail.com>
+Date:   Tue Jan 10 20:26:25 2017 -0800
+
+    styled 404 page
+
+ 404.html | 19 ++++++++++++++++++-
+ 1 file changed, 18 insertions(+), 1 deletion(-)
+
+commit ff25faddf68cda960a6e071a0ee9c5c04d2640e8
+Author: Jonathan <Enirrisky@gmail.com>
+Date:   Tue Jan 10 20:17:30 2017 -0800
+
+    added a sandbox
+
+ 404.html | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+commit d725e2f40f7a6c0ceb115ca1d724694f0f2a443a
+Author: Jonathan <Enirrisky@gmail.com>
+Date:   Tue Jan 10 20:05:11 2017 -0800
+
+    changed style and 404
+
+ 404.html                   | 19 +++++++++++++++++++
+ pages/sandboxes/loops.html |  2 +-
+ style.css                  | 14 +++++++++++++-
+ 3 files changed, 33 insertions(+), 2 deletions(-)
+
+commit 588981ccbae3f280ca56556000f9446914684f94
+Author: Jonathan <Enirrisky@gmail.com>
+Date:   Tue Jan 10 19:22:27 2017 -0800
+
+    changed organization
+
+ background.jpg                 | Bin 0 -> 341936 bytes
+ data.js                        |  15 +++++++++
+ index.html                     |  16 +++++----
+ pages/CSS3AnimationsHOME.html  |  37 ++++++++++++++++++++
+ pages/CSS3TransformsHOME.html  |  37 ++++++++++++++++++++
+ pages/CSS3TransitionsHOME.html |  37 ++++++++++++++++++++
+ pages/CreatingHOME.html        |  37 ++++++++++++++++++++
+ pages/DOMHOME.html             |  37 ++++++++++++++++++++
+ pages/JSONHOME.html            |  37 ++++++++++++++++++++
+ pages/LocalHOME.html           |  37 ++++++++++++++++++++
+ pages/LoopsHOME.html           |  37 ++++++++++++++++++++
+ pages/ManipulatingHOME.html    |  37 ++++++++++++++++++++
+ pages/ObjectHOME.html          |  37 ++++++++++++++++++++
+ pages/StandardHOME.html        |  37 ++++++++++++++++++++
+ pages/UsingHOME.html           |  37 ++++++++++++++++++++
+ pages/VideoHOME.html           |  37 ++++++++++++++++++++
+ pages/sandboxes/loops.html     |  75 +++++++++++++++++++++++++++++++++++++++++
+ script.js                      |  14 ++++++++
+ style.css                      |   4 +++
+ 19 files changed, 598 insertions(+), 7 deletions(-)
+
+commit a84e1ac2ef4561f912e591bdc2165ff2b6e48ce3
+Merge: 0505f90 f255a1e
+Author: Jonathan <sir15004@byui.edu>
+Date:   Fri Jan 6 00:11:31 2017 -0800
+
+    Merge branch 'master' of github.com:Sirrine-Jonathan/Sirrine-Jonathan.github.io
+
+commit 0505f9078eec92e715540be14701c06bb235874c
+Author: Jonathan <Enirrisky@gmail.com>
+Date:   Fri Jan 6 00:04:39 2017 -0800
+
+    added gitignore
+
+ .gitignore     |  1 +
+ index.html.bak | 16 ----------------
+ 2 files changed, 1 insertion(+), 16 deletions(-)
+
+commit f255a1e271ab702c2ef40d5bf51741ad37c73bee
+Author: Jonathan <Enirrisky@gmail.com>
+Date:   Fri Jan 6 00:04:39 2017 -0800
+
+    added gitignore
+
+ .gitignore     |  1 +
+ index.html.bak | 16 ----------------
+ 2 files changed, 1 insertion(+), 16 deletions(-)
+
+commit e4aa06604a57f070a9abc3db2b55f15cb58569f5
+Author: Jonathan <Enirrisky@gmail.com>
+Date:   Thu Jan 5 23:43:45 2017 -0800
+
+    put script tag at bottom
+
+ index.html     | 10 +++++-----
+ index.html.bak | 17 ++++++++++++++++-
+ 2 files changed, 21 insertions(+), 6 deletions(-)
+
+commit e6aeaf92375b3861615369cadd18054054f59224
+Author: Jonathan <Enirrisky@gmail.com>
+Date:   Thu Jan 5 23:41:48 2017 -0800
+
+    set up the html framework
+
+ index.html     | 17 ++++++++++++++++-
+ index.html.bak |  1 +
+ 2 files changed, 17 insertions(+), 1 deletion(-)
+
+commit 8cf16c891a353786430874092d6556806f984461
+Author: Jonathan <Enirrisky@gmail.com>
+Date:   Thu Jan 5 23:30:45 2017 -0800
+
+    Initial commit
+
+ index.html | 1 +
+ 1 file changed, 1 insertion(+)

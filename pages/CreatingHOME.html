@@ -37,6 +37,8 @@
 				border-radius:50%;
 				border:1px solid blue;
 				background-color:blue;
+				top:350px;
+				left:0px;
 			}
 			
 			.block {
@@ -82,6 +84,8 @@
 				margin-top:350px;
 			}
 			
+			#sphereButton {
+			}
 		</style>
 	</head>
 	<body>
@@ -100,13 +104,16 @@
 			<div class="block"></div>
 		</div>
 		<div id="animation">
-			<div class="sphere rotate"></div>
+			<div class="sphere"></div>
 		</div>
 		<br />
 		<div class="inputDiv">
 			<input type="button" id="blockButton" value="play" />
 		</div>
-		
+		<div class="inputDiv" style="float:right">
+			<input type="button" id="sphereButton" value="start" />
+		</div>
+			
 		<div class="nav">
 			<a href="../index.html">home</a>
 		</div>
@@ -117,9 +124,44 @@
 	var css = document.styleSheets[1];
 	bbutton.addEventListener('click', drop);
 	
+	var first = true;
 	function drop(){
 		if(this.value == 'play'){
 			this.value = 'pause';
+			if(first){
+				first = false;
+				var text = document.createTextNode('Hover your mouse over the box to pause it');
+				var span = document.createElement('span');
+				span.id = 'hoverMSG';
+				span.appendChild(text);
+				this.parentElement.appendChild(span);
+				
+				block.addEventListener('mouseenter', function(){
+					var computedStyle = window.getComputedStyle(block);
+					var marginTop = computedStyle.getPropertyValue('margin-top');
+					block.style.marginTop = marginTop;
+					block.classList.remove('drop');  
+				});
+				
+				block.addEventListener('mouseleave', function(){
+					//get current marginTop
+					let computedStyle = window.getComputedStyle(block);
+					let marginTop = computedStyle.getPropertyValue('margin-top');
+
+					//make edits to drop class
+					let speed = getFallTime(marginTop)+'s';
+					css.removeRule(css.cssRules.length - 1);
+					let newRule = ".drop { transition-duration: "+speed+"; transition-timing-function: ease-in; margin-top: 350px !important; }";
+					css.insertRule(newRule, css.cssRules.length);
+
+					//add class
+					block.classList.add('drop');
+					let dropper = document.getElementsByClassName('drop')[0];
+					dropper.addEventListener('transitionend', function(){
+						bbutton.value = 'done';
+					});
+				});
+			}
 			
 			//get current marginTop
 			let computedStyle = window.getComputedStyle(block);
@@ -136,6 +178,7 @@
 			let dropper = document.getElementsByClassName('drop')[0];
 			dropper.addEventListener('transitionend', function(){
 				bbutton.value = 'done';
+				document.getElementById('hoverMSG').style.display = 'none';
 			});
 		}
 		else if(this.value == 'pause'){
@@ -164,7 +207,6 @@
 	<script>
 	var startButton = document.getElementById('sphereButton');
 	var sphere = document.getElementsByClassName('sphere')[0];
-	console.log(sphere);
 	startButton.addEventListener('click', function(){
 		if(this.value == 'start'){
 			this.value = 'stop';
@@ -174,7 +216,6 @@
 		else{
 			this.value = 'start';
 			var computedStyle = window.getComputedStyle(sphere);
-			console.log(computedStyle);
 			sphere.style = computedStyle;
 			sphere.classList.remove('color');
 			sphere.classList.remove('rotate');

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Local Storage, etc</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+	<style>
+	
+		body {
+			margin:0;
+		}
+
+	/*  HEADER  */
+		
+		#top {
+			color:white;
+			background-color:#3b5998;
+			height:30px;
+			vertical-align: middle;
+			padding:5px;
+			padding-top:7px;
+		}
+		
+		#search {
+			display:inline-block;
+			width:60%;
+			text-align:center;
+		}
+		
+		#searchIcon {
+			background-color:#f7f7f7;
+			width:30px;
+			height:20px;
+			border-radius:5%;
+			color:grey;
+		}
+		
+		#searchInput {
+			width:40%;
+			border-radius:5%;
+		}
+		
+		#links {
+			display:inline-block;
+			widht:40%;
+		}
+		
+		a#home {
+			color:white;
+			font-size: 16px;
+			text-decoration: none;
+			margin-left:15px;
+		}
+		
+		#name {
+			margin-left:15px;
+		}
+		
+		#smallPic {
+			width:25px;
+			height:25px;
+			vertical-align: middle;
+		}
+		
+		/* JUMBOTRON */
+		
+		#pictures {
+			margin-left:5%;
+			height:450px;
+		}
+		
+		#banner {
+			position:absolute;
+			width:90%;
+			height:450px;
+		}
+		
+		#pic {
+			position:relative;
+			border:3px solid white;
+			border-radius:3%;
+			left:20px;
+			top:100px;
+		}
+		
+		/* LEFT COLUMN */
+
+		#columns {
+			border:2px solid green;
+			width:90%;
+			margin:0 auto;
+		}
+		
+		#leftColumn {
+			display:inline-block;
+			border:1px solid black;
+			width:45%;
+		}
+		
+		#summary {
+			display:inline-block;
+			border:1px solid black;
+			background-color:white;
+			width:90%;
+			height:100px;
+			margin-left:5%;
+		}
+		
+		#formDiv {
+			display:inline-block;
+			width:90%;
+			margin-left:5%;
+			border:1px solid black;
+		}
+		
+		/* RIGHT COLUMN */
+		
+		#rightColumn {
+			display:inline-block;
+			border:1px solid black;
+			width:45%;
+			float:right;
+		}
+		
+		#posts {
+			display:inline-block;
+			border:1px solid black;
+			background-color:#dfe3ee;
+			width:100%;
+			padding:5px;
+			margin-right:50px;
+		}
+		
+		#postForm {
+			border:1px solid black;
+			padding:5px;			
+			background-color:#8b9dc3;
+			width:90%;
+			margin:0 auto;
+		}
+		
+		#newPost {
+			width:90%;
+			margin:0 auto;
+			min-height:50px;			
+		}
+		
+		.post {
+			border:2px solid #8b9dc3;
+			border-radius:5px;
+			padding:5px;
+			background-color:white;
+			width:90%;
+			margin:0 auto;
+			min-height:50px;
+		}
+		
+		.timeStamp {
+			float:right;
+		}
+		
+		.content {
+			text-align: center;
+		}
+	
+	</style>
+</head>
+<body>
+	<div id="top" >
+		<div id="search">
+			Local Storage API
+			<input type="text" id="searchInput"/>
+			<i class="fa fa-search" id="searchIcon"></i>
+		</div>
+		<div id="links">
+			<img src="pictures/pic.jpg" id="smallPic"></img>
+			<span id="name">Jonathan</span>
+			<a href="../index.html" id="home">Home</a>
+		</div>
+		<!--
+		<span id="title">Local Storage API</span>
+		<span>Storing and Retrieving Simple Data,Arrays,Associative Arrays,Objects</span>
+		-->
+	</div>
+	
+	
+	<div id="pictures">
+		<img src="pictures/banner.jpg" id="banner"></img>
+		<img src="pictures/pic.jpg" id="pic"></img>
+	</div>
+	
+	<div id="columns">
+		<div id="leftColumn">
+			<div id="summary">
+				<p id=""></p>
+			</div><br />
+			
+			<div id="formDiv">
+			<h3>Update Info:</h3>
+				<form>
+					<label>Bio</label><br />
+					<textarea type="text" style="width:80%;height:100px;" id="Bio"></textarea><br />
+					<label>Age</label><br />
+					<input type="number" id="Age" /><br />
+					<label>Occupation</label><br />
+					<input type="text" id="Occupation" /><br />
+					<label>Highschool</label><br />
+					<input type="text" id="highschool" /><br />
+					<label>Location</label><br />
+					<input type="text" id="location" /><br />
+					<label>Relationship Status</label><br />
+						<input type="radio" name="status" id="single" selected="true"/><label>Single</label><br />
+						<input type="radio" name="status" id="relationship" /><label>In a relationship</label><br />
+						<input type="radio" name="status" id="engaged" /><label>Engaged</label><br />
+						<input type="radio" name="status" id="divorced" /><label>Divorced</label><br />
+					<input type="button" id="updateSummary" value="Update" />
+
+				</form>
+			</div>
+		</div>
+		
+		<div id="rightColumn">
+			<div id="posts">
+				<div class="post">
+				<span class="author" >Jonathan</span> <span class="timeStamp">2/2/17</span>
+				<p class="content">
+				Hey this is my first wallpost on my local page. Check me out!
+				</p>
+				</div>
+				
+				<div id="postForm">
+					<form>
+						<label>New Post</label><br />
+						<textarea type="text" id="newPost"></textarea><br />
+						<input type="button" id="submitPost" value="Post"/>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+<script>
+	var output = document.getElementById('output');
+	var submitPost = document.getElementById('submitPost');
+	var submitSummary = document.getElementById('updateSummary');
+	// check for browser support
+	if (typeof(Storage) !== "undefined") {
+		var ls = window.localStorage;
+		
+		submitSummary.addEventListener('click', updateSummary);
+		
+		window.onload = function(){
+			//load data on window load
+			ls.summary.
+			
+		}
+		
+		function addPost(){};
+		function deletePost(){};
+		function updatePost(){};
+		function updateSummary(){
+			
+			var bio = document.getElementById('Bio').value;
+			var age = document.getElementById('Age').value;
+			var occupation = document.getElementById('Occupation').value;
+			var school = document.getElementById('highschool').value;
+			var location = document.getElementById('location').value;
+			var radios = document.getElementsByName('status');
+			var status;
+			
+			//find radio input
+			for (var i = 0, length = radios.length; i < length; i++) {
+				if (radios[i].checked) {
+					status = radios[i].value;
+					break;
+				}
+			}
+			
+			ls.setItem('summary',{
+				'bio': bio,
+				'age': age,
+				'occupation': occupation,
+				'school': school,
+				'location': location,
+				'status': status
+			});
+		};
+		
+	}
+	else{
+		output.innerHTML = 'Sorry, Your browser does not support Local Storage';
+	}
+	
+	
+// check for JSON support
+// if (typeof JSON == ‘object’ && typeof JSON.parse == ‘function’
+
+/*
+
+.getItem
+lS.getItem('label');
+
+.setItem
+lS.setItem('label','data');
+
+.[label] : set data
+
+lS.label = 'data'
+
+.[label] : retrieve data
+myVar = lS.label
+
+.removeItem
+lS.removeItem('label')
+
+	localStorage.setItem(“label”, “data”);
+	localStorage.getItem(“label”);
+	
+*/
+</script>
+</body>
+</html>

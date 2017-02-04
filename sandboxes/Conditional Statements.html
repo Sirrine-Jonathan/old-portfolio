@@ -22,16 +22,22 @@
 		var browser, uAgent = window.navigator.userAgent;
 		console.log(uAgent);
 		//Conditional Statements
-		if(uAgent.indexOf("Chrome")){
+		if(uAgent.indexOf("Chrome/xyz")){
 			browser = "Chrome";
-		} else if (uAgent.indexOf("Safari")){
+		}else if (uAgent.indexOf("Chromium/xyz")){
+			browser = "Chromium";
+		}else if (uAgent.indexOf("Safari/xyz")){
 			browser = "Safari";
-		} else if (uAgent.indexOf("Safari")){
+		} else if (uAgent.indexOf("Opera/xyz") || uAgent.indexOf("OPR/xyz")){
 			browser = "Opera";
-		} else if (uAgent.indexOf("Safari")){
+		} else if (uAgent.indexOf("Firefox/xyz")){
 			browser = "Firefox";
-		} else if (uAgent.indexOf("Safari")){
+		} else if (uAgent.indexOf("; MSIE xyz;")){
 			browser = "Internet Explorer";
+		} else if (uAgent.indexOf("Seamonkey/xyz")){
+			browser = "Seamonkey";
+		} else{
+			broswer = "Your browser is undetectable by this webpage's script";
 		}
 		
 		var output = document.getElementById('output')
