@@ -8,24 +8,85 @@
 			resize:both;
 			width:500px;
 		}
+		
+		#display, span {
+			color:white;
+			font-size:0.8em;
+		}
 	</style>
 </head>
 <body>
 	<h1>Leave a note for yourself</h1>
+	<div id="display">
+		<span id="nameDis"></span> | <span id="locationDis"></span> | <span id="timeDis"></span>
+	</div>
 	<textarea id="note" rows="10"></textarea>
+	<form id="form">
+		<input type="text" id="name" placeholder="name" />
+		<input type="button" id="submit" value="submit" />
+	</form>
 	<div class="nav">
 		<a href="../index.html">home</a>
 	</div>
 <script>
 	
 if (typeof(Storage) !== "undefined") {
+
+	//variables and functions
 	var ls = window.localStorage;
 	var note = document.getElementById('note');
+	var submit = document.getElementById('submit');
+	var nameDis = document.getElementById('nameDis');
+	var locationDis = document.getElementById('locationDis');
+	var timeDis = document.getElementById('timeDis');
 	
+	function createJSON(name, lat, lon, userLocation){
+		var data = {
+			'name': name,
+			'lat': lat,
+			'lon': lon,
+			'location': userLocation,
+			'time': new Date().toLocaleString()
+		}
+		return data;
+	}
+	function displayMeta(){
+			var parsedData = JSON.parse(ls.meta);
+			nameDis.innerHTML = parsedData.name;
+			timeDis.innerHTML = parsedData.time;
+			if(parsedData.location){
+				locationDis.innerHTML = parsedData.location;
+			}
+			else{
+				var url = "http://www.google.com/maps/place/"+parsedData.lat+","+parsedData.lon;
+				locationDis.innerHTML = '<a href="'+url+'" target="_blank" >'+parsedData.lat+', '+parsedData.lon+'</a>';
+			}
+	}
+	
+	//retreives relevant data onload
 	window.onload = function(){
 		if(ls.note){
 			note.value = ls.note;
 		}
+		if(ls.meta){
+			displayMeta();
+		}
+	}
+	
+	if (!("geolocation" in navigator)) {
+		/* geolocation IS NOT available */
+		loc = document.createElement('input');
+		var attr1 = document.createAttribute('type');
+		attr1.value = 'text';
+		var attr2 = document.createAttribute('id');
+		attr2.value = 'location';
+		var attr3 = document.createAttribute('placeholder');
+		attr3.value = 'location';
+		loc.setAttributeNode(attr1);
+		loc.setAttributeNode(attr2);
+		loc.setAttributeNode(attr3);
+		var parent = submit.parentNode;
+		parent.insertBefore(loc, submit);
 	}
 	
 	note.addEventListener('keyup', function(){
@@ -33,6 +94,32 @@ if (typeof(Storage) !== "undefined") {
 		ls.setItem('note', currentNote);
 	});
 	
+	submit.addEventListener('click', function(){
+		
+		//getting the relevant parts
+		var name = document.getElementById('name').value;
+		var userLocation;
+		if(('geolocation' in navigator) && name){
+			
+			navigator.geolocation.getCurrentPosition(function(pos){
+					var lat = pos.coords.latitude.toFixed(4);
+					var lon = pos.coords.longitude.toFixed(4);
+					var data = createJSON(name, lat, lon, userLocation);
+					var json = JSON.stringify(data);
+					ls.setItem('meta', json);
+					displayMeta();
+			});
+		}
+		else{
+			userLocation = document.getElementById('location').value;
+			if(userLocation){
+				var data = createJSON(name, undefined, undefined, userLocation);
+				var json = JSON.stringify(data);
+				ls.setItem('meta', json);
+				displayMeta();
+			}
+		}
+	});
 	
 }
 else{
