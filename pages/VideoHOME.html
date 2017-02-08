@@ -4,9 +4,25 @@
 	<title>CSS3Transitions</title>
 	<link href="../style.css" rel="stylesheet"/>
 	<script src="../data.js"></script>
+	<style>
+		#previewFrame {
+			display:inline-block;
+			float:right;
+			border: 1px solid #FFF;
+			width: 68%;
+			height: 700px;
+			overflow: hidden;
+		}
+		
+		#linkListDiv {
+			display:inline-block;
+			width:28%;
+		}
+	</style>
 </head>
 <body>
 	<h1 id="title">tbd</h1>
+	<iframe id="previewFrame" scrolling="no" src=''></iframe>
 	<div id="linkListDiv">
 		<h3>Study Topics</h3>
 		<ol id="list">
@@ -28,6 +44,12 @@
 			let href = '../sandboxes/'+name+'.html';
 			anchor.setAttribute('href',href);
 			anchor.appendChild(text);
+			
+			//new things
+			anchor.addEventListener('mouseenter', function(){
+				document.getElementById('previewFrame').src = href;
+			});		
+			
 			li.appendChild(anchor);
 			list.appendChild(li);
 		}

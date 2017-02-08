@@ -6,14 +6,35 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
 	<script src="script.js"></script>
 	<script src="data.js"></script>
+	<style>
+		.link {
+			color:#069; 
+			cursor:pointer;
+		}
+		
+		#previewFrame {
+			display:inline-block;
+			border:black;
+			float:right;
+			width: 48%;
+			height: 700px;
+			overflow: hidden;
+		}
+		
+		#linkListDiv {
+			display:inline-block;
+			width:48%;
+		}
+	</style>
 </head>
 <body>
 	<h1>Home Page for Jonathan Sirrine's cit261 coursework</h1>
+	<iframe id="previewFrame" scrolling="no" src='previewIntro.html'></iframe>
 	<div id="linkListDiv">
 		<h3>Study Topics</h3>
-		<ol id="list">
-		</ol>
-	</div>
+		<ul id="list">
+		</ul>
+	</div><br />
 	<a href="progress.html"><i class="fa fa-graduation-cap"></i> Progress</a> | <a href="https://github.com/Sirrine-Jonathan/Sirrine-Jonathan.github.io" target="_blank"><i class="fa fa-github"></i> Github Repo</a> | <a href="https://enirrisky.github.io"><i class="fa fa-code"></i> Portfolio</a>
 </body>
 </html>

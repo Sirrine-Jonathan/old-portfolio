@@ -6,9 +6,21 @@ window.onload = function(){
 		let text = document.createTextNode(studyTopics[l]);
 		let arr = studyTopics[l][0].split(' ');
 		let href = 'pages/'+arr[0]+'HOME.html';
+		let linkDiv = document.createElement('div');
+		linkDiv.setAttribute('class','linkDiv');
 		anchor.setAttribute('href',href);
 		anchor.appendChild(text);
-		li.appendChild(anchor);
+		
+		//new things
+		anchor.addEventListener('mouseenter', function(){
+			document.getElementById('previewFrame').src = href;
+		});	
+		anchor.addEventListener('mouseleave', function(){
+			document.getElementById('previewFrame').src = 'previewIntro.html';
+		});
+		
+		linkDiv.appendChild(anchor);
+		li.appendChild(linkDiv);
 		list.appendChild(li);
 	}
 }

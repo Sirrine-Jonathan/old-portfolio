@@ -99,7 +99,13 @@
 		
 		drawRect.addEventListener('click', function(){
 			ctx.strokeRect(startx.value, starty.value, stopx.value, stopy.value); //fillRect  clearRect
-			reset();
+			
+			//reset for smaller inner rectangle
+			startx.value = parseFloat(startx.value) + 4;
+			starty.value = parseFloat(starty.value) + 4;
+			stopx.value = parseFloat(stopx.value) - 8;
+			stopy.value = parseFloat(stopy.value) - 8;
+			drawRect.focus();			
 		});
 		
 		arc.addEventListener('click', function(){

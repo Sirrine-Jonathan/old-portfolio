@@ -3,33 +3,54 @@
 <head>
 	<title>Manipulating CSS, etc</title>
 	<link href="../style.css" rel="stylesheet"/>
-	<script src="../data.js"></script>
+	<style>
+		body {
+			color:white;
+			
+		}
+	
+		.box {
+			width:5%;
+			height:50px;
+		}
+	</style>
 </head>
 <body>
-	<h1 id="title">tbd</h1>
-	<div id="linkListDiv">
-		<h3>Study Topics</h3>
-		<ol id="list">
-		</ol>
+	<h1 id="title">Manipulating CSS Class Properties Using JavaScript</h1>
+	<p>
+		I am unsure of what to do here.
+	</p>
+	<div id="boxContainer">
+	</div>
+	<div class="nav">
+		<a href="../index.html">home</a>
 	</div>
 	
-	<a href="../index.html">home</a>
-	
 <script>
-	window.onload = function(){
-		var page = 6;
-		document.getElementById('title').innerHTML = studyTopics[page][0]+" Home";
-		for(let l=0; l<studyTopics[page].length;l++){
-			let list = document.getElementById('list');
-			let li = document.createElement('li');
-			let anchor = document.createElement('a');
-			let text = document.createTextNode(studyTopics[page][l]);
-			let name = studyTopics[page][l];
-			let href = '../sandboxes/'+name+'.html';
-			anchor.setAttribute('href',href);
-			anchor.appendChild(text);
-			li.appendChild(anchor);
-			list.appendChild(li);
+	//set up div's
+	var boxCon = document.getElementById('boxContainer');
+	var bod = document.getElementsByTagName('body')[0];
+	console.log(bod);
+	var colors = ['red','orange','yellow','green','blue','indigo','violet'];
+	colors.forEach(function(color){
+		var box = document.createElement('div');
+		box.classList.add('box');
+		box.style.backgroundColor = color;
+		boxCon.appendChild(box);
+	});
+	
+	var boxArr = document.getElementsByClassName('box');
+	console.log(boxArr);
+	for(box in boxArr){
+		if(typeof boxArr[box] == 'object'){
+			boxArr[box].addEventListener('mouseover', function(){
+				bod.style.backgroundColor = this.style.backgroundColor;
+				this.style.width = '20%';
+			});
+			boxArr[box].addEventListener('mouseout', function(){
+				bod.style.backgroundColor = 'black';
+				this.style.width = '5%';
+			});
 		}
 	}
 </script>
