@@ -16,26 +16,32 @@
 			display:inline-block;
 			border:black;
 			float:right;
-			width: 48%;
-			height: 700px;
+			width: 58%;
+			height: 1000px;
 			overflow: hidden;
 		}
 		
-		#linkListDiv {
+		#linkListDiv, #homepageTitle {
+			color:white;
 			display:inline-block;
-			width:48%;
+			width:38%;
 		}
 	</style>
 </head>
 <body>
-	<h1>Home Page for Jonathan Sirrine's cit261 coursework</h1>
-	<iframe id="previewFrame" scrolling="no" src='previewIntro.html'></iframe>
+	<div id="homepageTitle">
+		<h1>CIT261 coursework</h1>
+		<h3>Jonathan Sirrine</h3>
+	</div>
+	
+	<iframe id="previewFrame" scrolling="no" src='previewIntro.html' crossOrigin="anonymous"></iframe>
 	<div id="linkListDiv">
-		<h3>Study Topics</h3>
-		<ul id="list">
-		</ul>
+		<div id="list">
+		</div>
 	</div><br />
-	<a href="progress.html"><i class="fa fa-graduation-cap"></i> Progress</a> | <a href="https://github.com/Sirrine-Jonathan/Sirrine-Jonathan.github.io" target="_blank"><i class="fa fa-github"></i> Github Repo</a> | <a href="https://enirrisky.github.io"><i class="fa fa-code"></i> Portfolio</a>
+	<div class="nav">
+		<a href="progress.html"><i class="fa fa-graduation-cap"></i> Progress</a> | <a href="https://github.com/Sirrine-Jonathan/Sirrine-Jonathan.github.io" target="_blank"><i class="fa fa-github"></i> Github Repo</a> | <a href="https://enirrisky.github.io"><i class="fa fa-code"></i> Portfolio</a> | <a href="MAILTO:sirrineprogramming@gmail.com"><i class="fa fa-envelope"></i> email</a>
+	</div>
 </body>
 </html>
 
