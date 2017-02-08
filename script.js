@@ -17,6 +17,7 @@ window.onload = function(){
 		});	
 		anchor.addEventListener('mouseleave', function(){
 			document.getElementById('previewFrame').src = 'previewIntro.html';
+			
 		});
 		
 		linkDiv.appendChild(anchor);
