@@ -11,7 +11,7 @@ window.onload = function(){
 		let href = 'pages/'+arr[0]+'HOME.html';
 		let linkDiv = document.createElement('div');
 		linkDiv.setAttribute('class','linkDiv');
-		//anchor.setAttribute('href',href);
+		//anchor.setAttribute('href', href);
 		span.appendChild(text);
 		span.setAttribute('class','linkText');
 		
