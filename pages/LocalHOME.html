@@ -32,6 +32,7 @@
 	</div>
 <script>
 	
+//checks to see if browser supports Local Storage API
 if (typeof(Storage) !== "undefined") {
 
 	//variables for local storage, buttons, displays, and inputs
@@ -42,18 +43,25 @@ if (typeof(Storage) !== "undefined") {
 	var locationDis = document.getElementById('locationDis');
 	var timeDis = document.getElementById('timeDis');
 	
-	//function that creates an object
-	function createJSON(name, userLocation){
+	//object constructor used for name location and time input shown in display
+	function DATA(name, userLocation){
 		this.name =  name,
 		this.location = userLocation,
 		this.time = new Date().toLocaleString()
-		return this;
 	}
+	
+	//gets display data from Local Storage and displays it
 	function displayMeta(){
+	
+			//the object that is stored as a string needs to be parsed
 			var parsedData = JSON.parse(ls.meta);
+			
+			//each bit of hmtl is set to the relevant data
 			nameDis.innerHTML = parsedData.name;
 			timeDis.innerHTML = parsedData.time;
 			locationDis.innerHTML = parsedData.location;
+			
+			//removes any err message that might have been displayed
 			document.getElementById('errMsg').innerHTML = '';
 	}
 	
@@ -67,21 +75,34 @@ if (typeof(Storage) !== "undefined") {
 		}
 	}
 	
+	//the note is updated on each key up 
+	//unlike the display data which is updated on submit
 	note.addEventListener('keyup', function(){
 		var currentNote = document.getElementById('note').value;
 		ls.setItem('note', currentNote);
 	});
 	
+	//submit button to update display data (name, location, time)
 	submit.addEventListener('click', function(){
 		
 		//getting the relevant parts
 		var name = document.getElementById('name').value;
 		var userLocation = document.getElementById('location').value;
+		
+		//the conditionals do form validation
 		if(name){
 			if(userLocation){
-				var data = createJSON(name, userLocation);
+			
+				//if both pieces are supplied we use the object constructor
+				var data = new DATA(name, userLocation);
+				
+				//the object is stringified before being set in local storage
 				var json = JSON.stringify(data);
+
+				//we use our previously delared ls variable which references window.localStorage
 				ls.setItem('meta', json);
+				
+				//then we call our function to update the data from what's been stored
 				displayMeta();
 			}
 			else{
@@ -95,7 +116,7 @@ if (typeof(Storage) !== "undefined") {
 				document.getElementById('errMsg').innerHTML = 'You are missing your name';
 			}
 			else{
-				//display missing location err
+				//display missing data err
 				document.getElementById('errMsg').innerHTML = 'You are missing name and location';
 			}
 		}

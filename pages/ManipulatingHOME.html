@@ -10,31 +10,49 @@
 		}
 		
 		.btn {
+			display:inline-block;
 			position:relative;
 			left:0;
 			top:0;
-			box-shadow:2px 2px 2px 2px white;
+			width: 15%;
+			text-align: center;
+			box-shadow:2px 2px 2px white;
 			border:1px solid white;
 			border-radius:5px;
-			display:inline-block;
 			padding:10px;
 			cursor:pointer;
+			margin:10px;
+			float:left;
+		}
+		
+		#info {
+			display:inline-block;
+			width:70%;
+			margin:0 auto;
+			padding:0 20px 10px;
+			font-size:0.9em;
 		}
 		
 		/*leave on bottom*/
 		.box {
-			width:1%;
+			width:0%;
 			height:50px;
 			transition:width 2s linear;
+			-webkit-transition:width 2s linear;
 		}
 	</style>
 </head>
 <body>
+
 	<h1 id="title">Manipulating CSS Class Properties Using JavaScript</h1>
-	<p>
-		<div class="btn" id="changeWidthBtn">Initiate Rainbow</div>
-	</p>
+	<div id="info">
+	The changes to the CSS are in the body's background color and the width of the divs that make up the rainbow. Both of these changes are made when events fire and both access the style property of the elements to make the changes. The change in the button's box-shadow to get the 'button depression' effect is made by accessing the document's stylesheet, removing the button's css rule, and inserting a new rule for it to follow. 
+	<br /></br />
+	Some other changes include the change in the button's innerHTML onclick and the change in the 'home' link's color when the background-color is changed on mouseenter and mouseleave of each div of the rainbow. 
+	</div>
+	<div class="btn" id="changeWidthBtn">Initiate Rainbow</div>
 	
+	<!--HTML element where the output will go--->
 	<div id="boxContainer">
 	</div>
 	
@@ -43,9 +61,9 @@
 	</div>
 	
 <script>
-	//sets up colored squares
+	//Sets up colored squares
 	var boxCon = document.getElementById('boxContainer');
-	var bod = document.getElementsByTagName('body')[0];
+	var bod = document.getElementsByTagName('body')[0];    //returns html collection. using [0] to get first/only element
 	var colors = ['red','orange','yellow','green','blue','indigo','violet'];
 	colors.forEach(function(color){
 		var box = document.createElement('div');
@@ -53,6 +71,7 @@
 		box.style.backgroundColor = color;
 		boxCon.appendChild(box);
 	});
+	
 	
 	/*
 	
@@ -69,7 +88,7 @@
 		if(typeof boxArr[box] == 'object'){
 			boxArr[box].addEventListener('mouseover', function(){
 			
-				//changes the background color to the moused-over square
+				//Changes the background color to the moused-over square
 				bod.style.backgroundColor = this.style.backgroundColor;
 				link.style.color = 'black';
 			});
@@ -98,31 +117,34 @@
 	changeWid.addEventListener('click', function(){
 		if(shortSq){
 			css.removeRule(css.cssRules.length - 1);
-			let newRule = ".box { width:90%; height:50px; transition:width 2s linear; }";
-			css.insertRule(newRule, css.cssRules.length); //relies on rule being last in the list...see note in style tag
+			let newRule = ".box { width:100%; height:50px; transition:width 2s linear; -webkit-transition:width 2s linear;}";
+			css.insertRule(newRule, css.cssRules.length); //Relies on rule being last in the list...see note in style in head tag
 			shortSq = false;
 			changeWid.innerHTML = 'Rainbow Return';
 		}
 		else{
 			css.removeRule(css.cssRules.length - 1);
-			let newRule = ".box { width:1%; height:50px; transition:width 2s linear; }";
+			let newRule = ".box { width:0%; height:50px; transition:width 2s linear; -webkit-transition:width 2s linear;}";
 			css.insertRule(newRule, css.cssRules.length);
 			shortSq = true;
 			changeWid.innerHTML = 'Initiate Rainbow';
 		}
 	});
 	
+	
 	/*
-		button depression on click
+	
+		Button depression on click
 			
 		-Uses mousedown and mouseup events
 		-Makes changes to css by accessing style property of the element
+		
 	*/
 	var boxShad = changeWid.style.boxShadow; //get boxShad on load for easier updates
 	changeWid.addEventListener('mousedown', function(){
 		changeWid.style.boxShadow = 'none';	
-		changeWid.style.top = '5px';
-		changeWid.style.left = '5px';
+		changeWid.style.top = '2px';  //changeWid button has position set to relative
+		changeWid.style.left = '2px';
 	});
 	
 	changeWid.addEventListener('mouseup', function(){
