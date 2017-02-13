@@ -20,7 +20,7 @@ window.onload = function(){
 			document.getElementById('previewFrame').src = href;
 			this.style.borderColor = 'black';
 		});	
-		linkDiv.addEventListener('mouseleave', function(){
+		document.getElementById('linkListDiv').addEventListener('mouseleave', function(){
 			document.getElementById('previewFrame').src = 'previewIntro.html';
 			this.style.borderColor = '#33ff66';
 		});

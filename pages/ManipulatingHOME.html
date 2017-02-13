@@ -8,29 +8,44 @@
 			color:white;
 			
 		}
-	
+		
+		.btn {
+			position:relative;
+			left:0;
+			top:0;
+			box-shadow:2px 2px 2px 2px white;
+			border:1px solid white;
+			border-radius:5px;
+			display:inline-block;
+			padding:10px;
+			cursor:pointer;
+		}
+		
+		/*leave on bottom*/
 		.box {
-			width:5%;
+			width:1%;
 			height:50px;
+			transition:width 2s linear;
 		}
 	</style>
 </head>
 <body>
 	<h1 id="title">Manipulating CSS Class Properties Using JavaScript</h1>
 	<p>
-		I am unsure of what to do here.
+		<div class="btn" id="changeWidthBtn">Initiate Rainbow</div>
 	</p>
+	
 	<div id="boxContainer">
 	</div>
+	
 	<div class="nav">
 		<a href="../index.html">home</a>
 	</div>
 	
 <script>
-	//set up div's
+	//sets up colored squares
 	var boxCon = document.getElementById('boxContainer');
 	var bod = document.getElementsByTagName('body')[0];
-	console.log(bod);
 	var colors = ['red','orange','yellow','green','blue','indigo','violet'];
 	colors.forEach(function(color){
 		var box = document.createElement('div');
@@ -39,20 +54,85 @@
 		boxCon.appendChild(box);
 	});
 	
+	/*
+	
+		Sets up mouse events that manipulate body background-color
+		
+		-Utilizes style property in the element to make the css change
+		-Incorporates the mouseover and mouseout events
+		
+	*/
+	var link = document.getElementsByTagName('a')[0];
+	var linkColor = link.style.color; //get link color on load for easier update
 	var boxArr = document.getElementsByClassName('box');
-	console.log(boxArr);
 	for(box in boxArr){
 		if(typeof boxArr[box] == 'object'){
 			boxArr[box].addEventListener('mouseover', function(){
+			
+				//changes the background color to the moused-over square
 				bod.style.backgroundColor = this.style.backgroundColor;
-				this.style.width = '20%';
+				link.style.color = 'black';
 			});
 			boxArr[box].addEventListener('mouseout', function(){
+			
+				//returns the background color of body back to black
 				bod.style.backgroundColor = 'black';
-				this.style.width = '5%';
+				link.style.color = linkColor;
 			});
 		}
 	}
+	
+	
+	/*
+	
+		Sets up button to change width of squares
+		
+		-Gets stylesheet from the document
+		-Removes .box rule and replaces it (might be a better way)
+		-Uses CSS transition
+	
+	*/
+	var changeWid = document.getElementById('changeWidthBtn');
+	var css = document.styleSheets[1];
+	var shortSq = true;
+	changeWid.addEventListener('click', function(){
+		if(shortSq){
+			css.removeRule(css.cssRules.length - 1);
+			let newRule = ".box { width:90%; height:50px; transition:width 2s linear; }";
+			css.insertRule(newRule, css.cssRules.length); //relies on rule being last in the list...see note in style tag
+			shortSq = false;
+			changeWid.innerHTML = 'Rainbow Return';
+		}
+		else{
+			css.removeRule(css.cssRules.length - 1);
+			let newRule = ".box { width:1%; height:50px; transition:width 2s linear; }";
+			css.insertRule(newRule, css.cssRules.length);
+			shortSq = true;
+			changeWid.innerHTML = 'Initiate Rainbow';
+		}
+	});
+	
+	/*
+		button depression on click
+			
+		-Uses mousedown and mouseup events
+		-Makes changes to css by accessing style property of the element
+	*/
+	var boxShad = changeWid.style.boxShadow; //get boxShad on load for easier updates
+	changeWid.addEventListener('mousedown', function(){
+		changeWid.style.boxShadow = 'none';	
+		changeWid.style.top = '5px';
+		changeWid.style.left = '5px';
+	});
+	
+	changeWid.addEventListener('mouseup', function(){
+		changeWid.style.boxShadow = boxShad;
+		changeWid.style.top = '0';
+		changeWid.style.left = '0';
+	});
+	
+	
+	
 </script>
 </body>
 </html>

@@ -23,6 +23,7 @@
 	<textarea id="note" rows="10"></textarea>
 	<form id="form">
 		<input type="text" id="name" placeholder="name" />
+		<input type="text" id="location" placeholder="location" />
 		<input type="button" id="submit" value="submit" />
 	</form>
 	<span id="errMsg"></span>
@@ -33,7 +34,7 @@
 	
 if (typeof(Storage) !== "undefined") {
 
-	//variables and functions
+	//variables for local storage, buttons, displays, and inputs
 	var ls = window.localStorage;
 	var note = document.getElementById('note');
 	var submit = document.getElementById('submit');
@@ -41,27 +42,18 @@ if (typeof(Storage) !== "undefined") {
 	var locationDis = document.getElementById('locationDis');
 	var timeDis = document.getElementById('timeDis');
 	
-	function createJSON(name, lat, lon, userLocation){
-		var data = {
-			'name': name,
-			'lat': lat,
-			'lon': lon,
-			'location': userLocation,
-			'time': new Date().toLocaleString()
-		}
-		return data;
+	//function that creates an object
+	function createJSON(name, userLocation){
+		this.name =  name,
+		this.location = userLocation,
+		this.time = new Date().toLocaleString()
+		return this;
 	}
 	function displayMeta(){
 			var parsedData = JSON.parse(ls.meta);
 			nameDis.innerHTML = parsedData.name;
 			timeDis.innerHTML = parsedData.time;
-			if(parsedData.location){
-				locationDis.innerHTML = parsedData.location;
-			}
-			else{
-				var url = "http://www.google.com/maps/place/"+parsedData.lat+","+parsedData.lon;
-				locationDis.innerHTML = '<a href="'+url+'" target="_blank" >'+parsedData.lat+', '+parsedData.lon+'</a>';
-			}
+			locationDis.innerHTML = parsedData.location;
 			document.getElementById('errMsg').innerHTML = '';
 	}
 	
@@ -75,22 +67,6 @@ if (typeof(Storage) !== "undefined") {
 		}
 	}
 	
-	if (!("geolocation" in navigator)) {
-		/* geolocation IS NOT available */
-		loc = document.createElement('input');
-		var attr1 = document.createAttribute('type');
-		attr1.value = 'text';
-		var attr2 = document.createAttribute('id');
-		attr2.value = 'location';
-		var attr3 = document.createAttribute('placeholder');
-		attr3.value = 'location';
-		loc.setAttributeNode(attr1);
-		loc.setAttributeNode(attr2);
-		loc.setAttributeNode(attr3);
-		var parent = submit.parentNode;
-		parent.insertBefore(loc, submit);
-	}
-	
 	note.addEventListener('keyup', function(){
 		var currentNote = document.getElementById('note').value;
 		ls.setItem('note', currentNote);
@@ -100,22 +76,10 @@ if (typeof(Storage) !== "undefined") {
 		
 		//getting the relevant parts
 		var name = document.getElementById('name').value;
-		var userLocation;
-		if(('geolocation' in navigator) && name){
-			
-			navigator.geolocation.getCurrentPosition(function(pos){
-					var lat = pos.coords.latitude.toFixed(4);
-					var lon = pos.coords.longitude.toFixed(4);
-					var data = createJSON(name, lat, lon, userLocation);
-					var json = JSON.stringify(data);
-					ls.setItem('meta', json);
-					displayMeta();
-			});
-		}
-		else if(name){
-			userLocation = document.getElementById('location').value;
+		var userLocation = document.getElementById('location').value;
+		if(name){
 			if(userLocation){
-				var data = createJSON(name, undefined, undefined, userLocation);
+				var data = createJSON(name, userLocation);
 				var json = JSON.stringify(data);
 				ls.setItem('meta', json);
 				displayMeta();
@@ -126,8 +90,14 @@ if (typeof(Storage) !== "undefined") {
 			}
 		}
 		else{
-			//display missing info err
-			document.getElementById('errMsg').innerHTML = 'You are missing some info';
+			if(userLocation){
+				//display missing name err
+				document.getElementById('errMsg').innerHTML = 'You are missing your name';
+			}
+			else{
+				//display missing location err
+				document.getElementById('errMsg').innerHTML = 'You are missing name and location';
+			}
 		}
 	});
 	

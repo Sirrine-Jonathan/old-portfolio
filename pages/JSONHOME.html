@@ -4,16 +4,210 @@
 	<title>JSON, etc</title>
 	<link href="../style.css" rel="stylesheet"/>
 	<script src="../data.js"></script>
+	<style>
+		#filter {
+		    position: relative;
+			display: inline-block;
+		}
+		
+		.btn, #run{
+			background-color: #33ff66;
+			color: black;
+			font-size:1.5em;
+			border:none;
+			padding: 10px;
+			cursor: pointer;
+		}
+	
+		#dropdown {
+			display:none;
+			position: absolute;
+			min-width:150px;
+			z-index: 1;
+		}
+		
+		.option {
+			background-color:grey;
+			margin:0;
+			padding:3px;
+			cursor:pointer;
+		}
+		
+		.option:hover {
+			background-color:black;
+		}
+		
+		#block-container {
+			margin-top:50px;
+		}
+		
+		#controls, #output {
+			display: inline-block;
+			min-height:350px;
+		}
+		
+		#controls {
+			width: 18%;
+		}
+		
+		#output {
+			float:right;
+			width: 78%;
+		}
+		
+		.nav {
+			clear: both;
+		}
+		
+		.info {
+			width:50%;
+			margin:0 auto;
+		}
+	</style>
 </head>
 <body>
-	<h1 id="title">JSON Parse,Stringify</h1>
+	<h1 id="title">JSON Stringify & Parse</h1>
+	<div class="info">
+		<p>
+		There is an object in the script that you can see here as a string because it has been stringified.
+		Select a filter to stringify the object returning only the data type of the filter. 
+		Notice that the 'object' filter returns the object as empty and the array with all its indexed strings as null.
+		Choosing 'string' as a filter does not return the strings in the array.
+		</p>
+		<p>
+		Click the parse button to parse the current string object back into an object
+		</p>
+	</div>
+	<div id="block-container">
+	<div id="controls">
+		<div id="filter">
+			<input type="button" class="btn" id="filterBtn" value="filter &#8595;" />
+			<input type="button" class="btn" id="parse" value="parse" /><br />
+			<div id="dropdown">
+				<p class="option">none</p>
+				<p class="option">string</p>
+				<p class="option">number</p>
+				<p class="option">boolean</p>
+				<p class="option">object</p>
+			</div>
+		</div>
+	</div>
+	<div id="output">
+		<pre id="display">
+		</pre>
+	</div>
+	</div>
 	
 	<div class="nav">
 		<a href="../index.html">home</a>
 	</div>
-	
 <script>
+	var dropdown = document.getElementById('dropdown');
+	var toggle = false;
+	var first = true;
+	var btn = document.getElementById('filterBtn');
+	var parse = document.getElementById('parse');
+	var filter = null;
+	var display = document.getElementById('display');
+	var run = document.getElementById('run');
+	var stringObj = '';
+	
+	
+	
+	var jsonObj = {
+		"number": 42,
+		"string": "Hello World",
+		"boolean": true,
+		"Array": ['zero','one','two'],
+		"Object": {
+			"username": "mailman",
+			"password": "hunter2"
+		},
+		"null": null,
+		
+		//a function is not a valid JSON data type and is in this object to show
+		//that it will not be included in the string when stringified
+		
+		"function": function(){
+			console.log('this function can\'t be stringified');
+		}
+	}
+	
+	//function to run our stringify method
+	var run = function(){
+	
+		/*		
+		
+		we use three parameters with the stringify method.
+		first the object (jsonObj), 
+		second a function (filterFn) used to fine tune the result, and
+		third is a number is a number from 0-10 (2)
+		that will decide how many spaces are used as a delimeter
+		
+		*/
+		method = 'stringify';
+		stringObj = JSON.stringify(jsonObj, filterFn, 2);
+		first = true;
+		display.innerHTML = stringObj;
+	};
+	run();
+	
+	//this variable which holds a function is the 2nd argument of JSON.stringify
+	//and is used to fine tune the returned string
+	var filterFn = function(key, val){
+		if((first || filter === 'none') && method === 'stringify'){
+			first = false;
+			return val;
+		}
+		if(filter !== null){
+		
+			//the filter here is selected in the drop down menu
+			if(typeof val === filter){
+				return val;
+			}
+			return undefined;
+		}
+		return val;
+	}
 
+	//filter button reveals dropdown menu
+	btn.addEventListener('click', function(){
+		if(toggle){
+			dropdown.style.display = 'none';
+			toggle = false;
+		}
+		else{
+			dropdown.style.display = 'inline-block';
+			toggle = true;
+		}
+	});
+	
+	window.onclick = function(e){
+
+		//dropdown menu is hidden if you click somewhere else
+		if(!e.target.matches('#filterBtn')) {
+			dropdown.style.display = 'none';
+			toggle = false;
+		}
+		
+		//choosing an option changes the filter an runs our function
+		if(e.target.className === 'option'){
+			dropdown.style.display = 'inline-block';
+			toggle = true;
+			filter = event.target.innerHTML;
+			run();
+		}
+	}
+	
+	parse.addEventListener('click', function(){
+		method = 'parse';
+		var parsedObj = JSON.parse(stringObj);
+		console.log(parsedObj);
+		if(parsedObj.hasOwnProperty('Array')){
+			console.log(parsedObj.Array[0]);
+		}
+		display.innerHTML = parsedObj;
+	});
 </script>
 </body>
 </html>

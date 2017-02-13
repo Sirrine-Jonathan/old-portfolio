@@ -18,9 +18,9 @@ body {
 	margin:3px;
 	margin-bottom:10px;
 	color:black;
-   white-space: pre-wrap;      /* CSS3 */   
-   white-space: -moz-pre-wrap; /* Firefox */   
-   white-space: -o-pre-wrap;   /* Opera 7 */    
+	white-space: pre-wrap;      /* CSS3 */   
+	white-space: -moz-pre-wrap; /* Firefox */   
+	white-space: -o-pre-wrap;   /* Opera 7 */    
 }
 
 .linkDiv:hover {
