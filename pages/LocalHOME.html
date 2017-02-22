@@ -13,6 +13,11 @@
 			color:white;
 			font-size:0.8em;
 		}
+		
+		#errMsg {
+			color: red;
+		}
+		
 	</style>
 </head>
 <body>
@@ -107,17 +112,17 @@ if (typeof(Storage) !== "undefined") {
 			}
 			else{
 				//display missing location err
-				document.getElementById('errMsg').innerHTML = 'You are missing a location';
+				document.getElementById('errMsg').innerHTML = '* You are missing a location';
 			}
 		}
 		else{
 			if(userLocation){
 				//display missing name err
-				document.getElementById('errMsg').innerHTML = 'You are missing your name';
+				document.getElementById('errMsg').innerHTML = '* You are missing your name';
 			}
 			else{
 				//display missing data err
-				document.getElementById('errMsg').innerHTML = 'You are missing name and location';
+				document.getElementById('errMsg').innerHTML = '* You are missing name and location';
 			}
 		}
 	});
