@@ -41,7 +41,9 @@
 		<input type="button" id="drawLine" value="draw line" />
 		<input type="button" id="drawRect" value="draw rect" />
 				<input type="number" id="radius" placeholder="radius" />
-		<input type="button" id="arc" value="arc" />
+		<input type="button" id="arc" value="arc" /><br />
+		<input type="text" id="text" placeholder="type here" />
+		<input type="button" id="addText" value="text" />
 		<div class="nav">
 			<a href="../index.html">home</a> |
 			<a href="../pages/VideoHOME.html">back</a>
@@ -63,6 +65,7 @@
 		var drawLine = document.getElementById('drawLine');
 		var drawRect = document.getElementById('drawRect');
 		var arc = document.getElementById('arc');
+		var textBtn = document.getElementById('addText');
 		
 		//get html for inputs
 		var startx = document.getElementById('startx');
@@ -115,6 +118,18 @@
 			ctx.arc(startx.value, starty.value, radius.value, radiansa, radiansb, true);
 			ctx.stroke();
 		});
+		
+		textBtn.addEventListener('click', function(){
+			//get text
+			var text = document.getElementById('text').value;
+			
+			//what do do with text
+			ctx.fillText(text,startx.value,starty.value);
+			
+			//move cursor to end of text
+			startx.value = parseFloat(startx.value) + ctx.measureText(text).width + 3;
+		});
+		
 		
 		
 		
