@@ -1,0 +1,337 @@
+<!DOCTYPE HTML>
+<html lang="en-us">
+	<head>
+		<title>Chat</title>
+		<link href="../../style.css" rel="stylesheet"/>
+		<style>
+			#msgBoard {
+				display:none;
+				border-radius:5px;
+				padding:10px;
+			}
+		
+			.post {
+				border-radius: 5px;
+				background-color:blue;
+				width:90%;
+				margin:10px auto;
+				padding:5px;
+			}
+			
+			.msg {
+				padding:5px; 
+				margin:0;
+			}
+			
+			.postDetails {
+				font-size:0.7em;;
+				font-family:currier-new;
+				padding:0;
+				float:right;
+				vertical-align:bottom;
+			}
+			
+			#newMsg {
+				box-sizing: border-box;
+				width:100%;
+				font-family:arial;
+			}
+			
+			#welcome {
+				text-align:center;
+				font-size:2em;
+			}
+			
+			input[type="button"] {
+				font-size:1.3em;
+				background-color:white;
+				cursor:pointer;
+			}
+			
+			h1 {
+				cursor:pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<h1><abbr title="ctrl-click this to remove all local data in connection with this site">Chat</abbr></h1>
+		<h3>This sandbox combines Local Storage API and DOM Manipulation</h3>
+		<div>
+			<p>
+			Register a username and password or login with an existing username and password. 
+			The post a new comment to the message board. All the data involved is stored on your local machine.
+			If you refresh the page, it will remember that you are logged in and keep you logged in as well as remember
+			all the message board data. 
+			</p>
+			<p>
+			To erase the data, hold down the control key on your keyboard and click the 'Chat' title. 
+			This will remove the chatData object from your local storage and refresh the page.
+			</p>
+		</div>
+		
+		<div id="welcome">
+			Welcome<span id="userWelcome"></span>
+		</div>
+		
+		<div id="loginBoard">
+			<div id="inputs">
+			<label>Username: </label><input id="username" type="text" /><br />
+			<label>Password: </label><input id="password" type="password" />
+			</div>
+			<input type="button" id="login" value="Login" />
+			<input type="button" id="register" value="Register" />
+			<span id="errorMsg"></span>
+		</div>
+		
+		<div id="msgBoard">
+			<div id="newPost" class="post">
+				<textarea id="newMsg" rows="6" placeholder="comment"></textarea><br />
+				<input type="button" id="submitBtn" value="submit" />
+				<span id="postErr"></span>
+			</div>
+		</div>
+		
+		<div class="nav">
+			<a href="../../index.html">home</a>
+		</div>
+		
+	<script>
+//checks to see if browser supports Local Storage API
+if (typeof(Storage) !== "undefined") {
+		
+			//storage variables
+		var ls = window.localStorage;
+		var data = {};
+		
+			//hold contrl and click the chat title to remove 
+			//the chatData object from local storage
+		var chat = document.getElementsByTagName('h1')[0];
+		chat.addEventListener('click', function(e){
+			if(e.ctrlKey){
+				ls.removeItem('chatData');
+				//refresh page
+				window.location.reload(true);
+				//since there is a local data object still populated
+				//the page will look and work the same until refreshed.
+			}
+		});
+		
+		
+		
+			//elements
+		var userWelcome = document.getElementById('userWelcome');
+		var errorMsg = document.getElementById('errorMsg');
+		var postErr = document.getElementById('postErr');
+		var inputs = document.getElementById('inputs');
+		var msgBoard = document.getElementById('msgBoard');
+		var newPost = document.getElementById('newPost');
+			
+			//buttons
+		var submitBtn = document.getElementById('submitBtn');
+		var loginBtn = document.getElementById('login');
+		var registerBtn = document.getElementById('register');
+		
+			//other variables
+		var colors = ['blue','green','red','purple','orange'];
+		
+			//page responds to any relevant data already in local storage
+		window.onload = loadData
+		function loadData(){
+			if(ls.chatData){
+			
+				//fills a variable local to the window
+				data = JSON.parse(ls.chatData);
+				
+				//uncomment to see object in console
+				//console.log(data);
+				
+				//looks for a current user
+				if(data.curUser != 'undefined'){
+					login();
+				}
+				else{
+					userWelcome.innerHTML = '';
+				}
+				
+				//calls a function on all post objects in posts array
+				data.posts.forEach(function(curVal, ind, arr){
+					addPost(curVal);
+				});
+			}
+			else{
+				
+				//if no data is found we create the empty object
+				//to prevent errors in setItem operations
+				data = {
+					"curUser": 'undefined',
+					"users": [],
+					"posts": []
+				}
+				var chatString = JSON.stringify(data);
+				ls.setItem('chatData', chatString);
+				
+			}
+		};
+		
+		function addPost(post){
+		
+			//post container div
+			var div = document.createElement('div');
+			div.classList.add('post');
+			div.style.backgroundColor = post.user.color;
+			
+			//message in div
+			var msg = document.createElement('pre');
+			msg.classList.add('msg');
+			msg.innerHTML = post.message;
+	
+			//post details
+			var details = document.createElement('div');
+			details.classList.add('postDetails');
+			details.innerHTML = post.user.username + ' ' + post.postDate;
+
+			//append elements
+			div.appendChild(details);
+			div.appendChild(msg);
+			msgBoard.insertBefore(div, newPost);
+		}
+		
+		//object creators
+		function User(username, password){
+			this.username = username,
+			this.password = password,
+			this.creationDate = new Date(),
+			this.color = colors[Math.floor(Math.random() * 5)]
+		}
+		
+		function Post(message, user){
+			this.message = message,
+			this.user = user,
+			this.postDate = new Date().toLocaleString()
+		}
+		
+		//used to validate username in login/register
+		function getUsernameIndex(name){
+			var inUse = false;
+			var index;
+			if(!data.users){
+				return -1;
+			}
+			data.users.forEach(function(curVal, ind, arr){
+				if(curVal.username === name){
+					inUse = true;
+					index = ind;
+				}
+			});
+			if(inUse){
+				return index;
+			}
+			else{
+				return -1;
+			}
+		}
+		
+		//changes the dom to show user logged in
+		function login(){
+			userWelcome.innerHTML = ', '+data.curUser.username; 
+			loginBtn.value = 'Logout';
+			errorMsg.innerHTML = '';
+			inputs.style.display = 'none';
+			registerBtn.style.display = 'none';
+			msgBoard.style.display = 'block';
+		}
+		
+		/*BUTTON EVENTS*/
+		
+		registerBtn.addEventListener('click', function(){
+			var newName = document.getElementById('username').value;
+			var newPassword = document.getElementById('password').value;
+			
+			//check if username is already in use
+			var userIndex = getUsernameIndex(newName);
+			if(userIndex >= 0){
+				errorMsg.innerHTML = 'username already in use';
+				return false;
+			}
+			
+			//check if password is valid
+			if(newPassword.length < 6){
+				errorMsg.innerHTML = 'password must be 6 characters or more';
+				return false;
+			}
+			
+			//register user
+			var newUser = new User(newName, newPassword);
+			data.users.push(newUser);
+			data.curUser = newUser;
+			var stringData = JSON.stringify(data);
+			ls.setItem('chatData', stringData);
+			login();
+		});
+			
+		loginBtn.addEventListener('click', function(){
+			if(this.value === 'Login'){
+				var newName = document.getElementById('username').value;
+				var newPassword = document.getElementById('password').value;
+				
+				//check if username is in use
+				var userIndex = getUsernameIndex(newName);
+				if(userIndex < 0){
+					errorMsg.innerHTML = 'username not found';
+					return false;
+				}
+				//check if password is correct
+				if(data.users[userIndex].password !== newPassword){
+					errorMsg.innerHTML = 'incorrect password';
+					return false;
+				}
+				
+				//login in user
+				data.curUser = data.users[userIndex];
+				ls.chatData = JSON.stringify(data);
+				login();
+				
+			}
+			else if(this.value === 'Logout'){
+				data.curUser = 'undefined';
+				ls.chatData = JSON.stringify(data);
+				loginBtn.value = 'Login';
+				userWelcome.innerHTML = ''; 
+				registerBtn.style.display = 'inline-block';
+				inputs.style.display = 'block';
+				msgBoard.style.display = 'none';
+			}
+		});
+		
+		submitBtn.addEventListener('click', function(){
+			
+			//makes sure that the post is at least not empty
+			var post = document.getElementById('newMsg').value;
+			if(post.length < 0){
+				postErr.innerHTML = 'your post needs to be longer';
+				return false;
+			}
+			
+			//make new post, add it to DOM and update local storage
+			var newpost = new Post(post, data.curUser);
+			data.posts.push(newpost);
+			var stringData = JSON.stringify(data);
+
+			ls.setItem('chatData', stringData);
+			addPost(newpost);
+			document.getElementById('newMsg').value = '';
+		});
+}
+else{
+
+	//if local storage is not supported a error message is shown.
+	var err = document.createElement('h1');
+	var errText = document.createTextNode('ERR: Your browser does not support Local Storage');
+	err.appendChild(errText);
+	var msgBoard = document.getElementById('msgBoard');
+	msgBoard.appendChild(err);
+	
+}
+	</script>
+	</body>
+</html>

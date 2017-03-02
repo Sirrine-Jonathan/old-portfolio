@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Mixtures</title>
+	<link href="../style.css" rel="stylesheet"/>
+	<script src="../data.js"></script>
+	<style>
+		#previewFrame {
+			display:inline-block;
+			float:right;
+			border: 1px solid #FFF;
+			width: 68%;
+			height: 700px;
+			overflow: hidden;
+		}
+		
+		#linkListDiv {
+			display:inline-block;
+			width:28%;
+		}
+	</style>
+</head>
+<body>
+	<h1 id="title"></h1>
+	<iframe id="previewFrame" scrolling="no" src=''></iframe>
+	<div id="linkListDiv">
+		<h3>Study Topics</h3>
+		<ol id="list">
+		</ol>
+	</div>
+	
+	<a href="../index.html">home</a>
+	
+<script>
+	window.onload = function(){
+		var page = 13;
+		var mixes = ['Chat'];
+		document.getElementById('title').innerHTML = studyTopics[page][0];
+		for(let l=0; l<mixes.length;l++){
+			let list = document.getElementById('list');
+			let li = document.createElement('li');
+			let anchor = document.createElement('a');
+			let text = document.createTextNode(mixes[l]);
+			let name = mixes[l];
+			let href = '../sandboxes/mixtures/'+name+'.html';
+			anchor.setAttribute('href',href);
+			anchor.appendChild(text);
+			
+			//new things
+			anchor.addEventListener('mouseenter', function(){
+				document.getElementById('previewFrame').src = href;
+			});	
+			
+			li.appendChild(anchor);
+			list.appendChild(li);
+		}
+	}
+</script>
+</body>
+</html>
