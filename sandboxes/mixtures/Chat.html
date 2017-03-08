@@ -59,8 +59,8 @@
 		<div>
 			<p>
 			Register a username and password or login with an existing username and password. 
-			The post a new comment to the message board. All the data involved is stored on your local machine.
-			If you refresh the page, it will remember that you are logged in and keep you logged in as well as remember
+			Then post a new comment to the message board. All the data involved is stored on your local machine.
+			If you refresh the page, it will remember that you are logged in as well as remember
 			all the message board data. 
 			</p>
 			<p>
@@ -115,8 +115,6 @@ if (typeof(Storage) !== "undefined") {
 				//the page will look and work the same until refreshed.
 			}
 		});
-		
-		
 		
 			//elements
 		var userWelcome = document.getElementById('userWelcome');
@@ -196,7 +194,7 @@ if (typeof(Storage) !== "undefined") {
 			msgBoard.insertBefore(div, newPost);
 		}
 		
-		//object creators
+		//object constructors
 		function User(username, password){
 			this.username = username,
 			this.password = password,
@@ -268,7 +266,8 @@ if (typeof(Storage) !== "undefined") {
 			ls.setItem('chatData', stringData);
 			login();
 		});
-			
+		
+		//login toggles between login and logout functionality
 		loginBtn.addEventListener('click', function(){
 			if(this.value === 'Login'){
 				var newName = document.getElementById('username').value;
@@ -286,7 +285,7 @@ if (typeof(Storage) !== "undefined") {
 					return false;
 				}
 				
-				//login in user
+				//login user
 				data.curUser = data.users[userIndex];
 				ls.chatData = JSON.stringify(data);
 				login();
@@ -312,7 +311,7 @@ if (typeof(Storage) !== "undefined") {
 				return false;
 			}
 			
-			//make new post, add it to DOM and update local storage
+			//makes new post, adds it to the DOM and updates local storage
 			var newpost = new Post(post, data.curUser);
 			data.posts.push(newpost);
 			var stringData = JSON.stringify(data);

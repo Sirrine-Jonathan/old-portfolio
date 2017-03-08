@@ -3,12 +3,26 @@
 	<head>
 		<title>Object Creation Functions</title>
 		<link href="../style.css" rel="stylesheet"/>
+		<style>
+			cite {
+				font-size:0.7em;
+			}
+		</style>
 	</head>
 	<body>
 		<h1>Object Creation Functions Sandbox</h1>
 		<div>
-			view sources in the developer tools to see the code.<br />
-			code output can be seen below:<br /><br />
+			<blockquote cite="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer">
+			"Objects can be initialized using new Object(), Object.create(), or using the literal notation (initializer notation)."
+			<br /><br /><cite>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer</cite>
+			</blockquote>
+			
+			<p>
+			Each object is created and passed a variable holding a value to populate them with a key value pair. Then it is stringified and added to the document. You can also see each object in the console. While each is given the variable to make a key value pair, only the object Constructors (new Object() and Constructor()) show the variable used as a key value pair in both the string in the document and in the console. 
+			</p>
+			<p>
+			Object.create() showed no signs of the variable in the object in console unless explicitly accessed, and the the key value pair in the Literal Notation only doesn't show up in the stringified object.  
+			</p>
 		</div>
 		<div id="output">
 		</div>
@@ -17,23 +31,45 @@
 			<a href="../pages/ObjectHOME.html">back</a>
 		</div>
 	<script>
+	
 		var output = document.getElementById('output');
 		
-		function teamMember(firstName, lastName, age, city, state){
-			this.firstName = firstName;
-			this.lastName = lastName;
-			this.age = age;
-			this.city = city;
-			this.state = state;
-			this.getIntro = function(){
-				return 'Hi, my name is '+firstName+' '+lastName+' and I am '+age+' years old. I live in '+city+', '+state;
-			}
+		//an expression we use to populate the objects
+		var key = 'value';
+	
+		function displayObj(obj, title){
+			console.log(obj);
+			var string = JSON.stringify(obj);
+			var div = document.createElement('pre');
+			var node = document.createTextNode(string);
+			var titleEl = document.createElement('h3');
+			titleEl.innerHTML = title;
+			div.classList.add('object');
+			div.appendChild(titleEl);
+			div.appendChild(node);
+			output.appendChild(div);
 		}
 		
-		var Jonathan = new teamMember("Jonathan", "Sirrine", 26, "Camano Island", "Washington");
+		//Objects can be initialized using new Object(), 
+		var newObject = new Object({key});
+		displayObj(newObject, 'new Object()');
 		
-		var node = document.createTextNode(Jonathan.getIntro());
-		output.appendChild(node);
+		//Object.create(), 
+		var objectCreate = Object.create({key});
+		displayObj(objectCreate, 'Object.create()');
+		console.log(objectCreate['key']);
+		
+		//or using the literal notation (initializer notation).
+		var litObject = {key}; //note that the expression becomes the key which holds the value 'value' in the object litObject
+		displayObj(objectCreate, 'Literal Notation');
+		console.log(litObject['key']);
+		
+		//another example of using a constructor like new Object
+		function Constructor(value){
+			this.key = value;
+		}
+		var conObject = new Constructor('value');
+		displayObj(conObject, 'Object Constructor');
 		
 		
 	</script>

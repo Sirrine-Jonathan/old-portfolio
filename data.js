@@ -1,6 +1,6 @@
 const studyTopics = [
 	["Loops", "Conditional Statements", "Functions", "Variables", "Parameters", "Arrays", "Associative Arrays"],
-	["Object Creation Functions", "Inheritance", "Properties", "Methods", "Instantiation"],
+	["Object Creation Functions", "Inheritance", "Properties Methods", "Instantiation"],
 	["JSON Parse", "Stringify"],
 	["Using XMLHTTPRequest to Consume a JSON Web Service"],
 	["Local Storage API", "Storing and Retrieving Simple Data", "Arrays", "Associative Arrays", "Objects"],
