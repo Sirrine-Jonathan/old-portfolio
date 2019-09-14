@@ -1,0 +1,152 @@
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    background-color: #febece;
+    background: url('./images/background.jpg') no-repeat center center fixed;
+    /*background: url('./images/colombia3.jpg') no-repeat center center fixed;*/
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+
+.head-container {
+    display: flex;
+	margin-top:0;
+	margin-bottom: 120px;
+}
+
+#header {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+	color: #2a2a2b; /*color: #ffd;*/
+	margin:0;
+	height: 1071px;
+	justify-content: space-around;
+}
+
+.head-title {
+    flex: 1;
+    padding-top: 4%;
+    padding-left: 6.47%;
+	background-color:inherit;
+	flex-direction: column;
+	font-family: 'Poiret One', cursive; 	
+}
+
+.menu {
+    padding-top: 2%;
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    background-color: inherit;
+    flex-direction: column;
+    font-family: 'Poiret One', cursive; 
+}
+
+.icon-span {
+	width: 40%;
+    box-sizing: border-box;
+	background-clip: padding-box;
+	transition: all 1s ease-out;
+	cursor: pointer;
+	padding: 1%;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	font-size: 3em;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	background-color: white;
+	background-color: rgba(255,255,255,0.5);
+} 
+
+.icon-span:hover {
+	width: 64.723%;
+	color: #2a2a2b; /*color:#191916;*/
+	background-color: #fff;
+}
+
+.icon-name {
+    transition: opacity 1s ease-out;
+    opacity: 0;
+    vertical-align: middle;
+}
+
+.icon {
+    flex: 1;
+    vertical-align: middle;
+}
+
+#name {
+	font-size : 6em;
+}
+
+#subtitle {
+    font-size: 3em;
+}
+
+@media only screen and (max-width: 768px) {
+  .icon-span {
+      width: 55.624%;
+      font-size: 1em;
+  }    
+    
+  .icon-span:hover {
+      width: 90%
+  }
+  
+  #name {
+	font-size: 2em;
+  }
+  
+  #subtitle {
+    font-size: 1.5em;
+  }
+  
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1620px) {
+/*  .icon-span {
+      width: 55.624%;
+  }    
+    
+  .icon-span:hover {
+      width: 90%
+  }*/
+  .icon-span {
+      width: 61.805%;
+      /*width: 70%;*/
+  }    
+    
+  .icon-span:hover {
+      width: 100%
+  }
+}
+
+@media only screen and (min-width: 1620px) and (max-width: 1720px) {
+  .icon-span {
+      width: 61.805%;
+      /*width: 70%;*/
+  }    
+    
+  .icon-span:hover {
+      width: 100%
+  }
+}
+
+
+
+
+

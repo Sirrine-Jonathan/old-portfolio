@@ -1,57 +1,96 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Home Page</title>
-	<link href="style.css" rel="stylesheet"/>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
-	<script src="script.js"></script>
-	<script src="data.js"></script>
-	<style>
-		.link {
-			color:#069; 
-			cursor:pointer;
-		}
-		
-		#previewFrame {
-			display:inline-block;
-			border:black;
-			float:right;
-			width: 58%;
-			height: 1000px;
-			overflow: hidden;
-		}
-		
-		#linkListDiv {
-			color:white;
-			display:inline-block;
-			width:38%;
-		}
-		
-		#homepageTitle {
-			padding:12px;
-			background-color:black;
-			border-radius:5px;
-			border:2px solid black;
-			color:white;
-			margin-bottom:10px;
-		}
-		
-	</style>
+<!DOCTYPE HTML>
+<html lang="en-us">
+<head><meta http-equiv="Content-Type" content="text/html; charset=euc-jp">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jonathan's Portfolio</title>
+<link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" 
+integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css" />
+<script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.4.8/collection/icon/icon.css" integrity="sha256-Y1Uf2oYKd0xAfbcNGkvWM+cNDCMmb/G4K/fXlFaVnkw=" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css?family=Monoton|Poiret+One|Source+Code+Pro|Unica+One" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="portfolio.css"/>
+<link rel="preload" href="videos/editedVid.mp4" as="video" type="video/mp4">
 </head>
-<body>
-	<div id="homepageTitle">
-		<h1>CIT261 coursework</h1>
-		<h3>Jonathan Sirrine</h3>
-	</div>
-	
-	<iframe id="previewFrame" scrolling="no" src='previewIntro.html' crossOrigin="anonymous"></iframe>
-	<div id="linkListDiv">
-		<div id="list">
+
+
+
+<body>   
+<div class="containment">
+
+  <!--start header-->
+  <div class="header-container">
+      <!--<img id="backdrop" style="z-index:-1; position:absolute;width: 100%;margin: 0;" src="images/flowBackground.PNG" />-->
+	  <!--<video id="jumboVid" autoplay loop muted preload="auto" src="videos/editedVid.mp4"></video>-->
+	  <div id="header">
+	      
+		<div class="head-title">
+		  <h1 id="name">Jonathan Sirrine</h1>		
+		  <h1 id="subtitle"><i>Web dev/design &middot; Software Engineer</i></h1>
 		</div>
-	</div><br />
-	<div class="nav">
-		<a href="progress.html"><i class="fa fa-graduation-cap"></i> Progress</a> | <a href="https://github.com/Sirrine-Jonathan/Sirrine-Jonathan.github.io" target="_blank"><i class="fa fa-github"></i> Github Repo</a> | <a href="https://enirrisky.github.io" target="_blank"><i class="fa fa-code"></i> Portfolio</a> | <a href="MAILTO:sirrineprogramming@gmail.com" target="_blank"><i class="fa fa-envelope"></i> email</a>
-	</div>
+		
+		<div class="menu" style="x-overflow: scroll">
+		    <span
+		        same
+		        class="icon-span" href="https://sirrineprogramming.com/projects/index.html"
+	        >
+		        <ion-icon class="icon" name="md-pulse"></ion-icon>
+		        <span class="icon-name">Live Projects</span>
+	        </span>
+	        <span
+	            same
+	            class="icon-span" 
+	            href="https://sirrineprogramming.com/games/index.html"
+            >
+	            <ion-icon class="icon" name="logo-game-controller-a"></ion-icon>
+	            <span class="icon-name">Games</span>
+	        </span>
+		    <span class="icon-span" href="https://github.com/Sirrine-Jonathan">
+		        <ion-icon class="icon" name="logo-github"></ion-icon>
+		        <span class="icon-name">Github</span>
+	        </span>
+	        <span class="icon-span" href="https://codepen.io/enirrisky/">
+		        <ion-icon class="icon" name="logo-codepen"></ion-icon>
+		        <span class="icon-name">Codepen</span>
+	        </span>
+	        <span class="icon-span" href="https://app.codesignal.com/profile/jon_sirrine">
+	            <ion-icon class="icon" name="md-code"></ion-icon>
+	            <span class="icon-name">CodeSignal</span>
+	        </span>
+		    <span class="icon-span" href="https://www.linkedin.com/in/jonathan-sirrine/">
+		        <ion-icon class="icon" name="logo-linkedin"></ion-icon>
+		        <span class="icon-name">Linkedin</span>
+	        </span>
+	        <!--
+		    <span class="icon-span" href="https://twitter.com/Enirrisky">
+		        <ion-icon class="icon" name="logo-twitter"></ion-icon>
+		        <span class="icon-name">Twitter</span>
+	        </span>
+	        
+		    <span class="icon-span" href="https://my.byui.edu/ICS/Applications/CRM/HttpHandlers/Tunnel.ashx?id=ee0a0edf-555e-4519-8091-475837e42572">
+		        <ion-icon class="icon" name="md-school"></ion-icon>
+		        <span class="icon-name">Transcript</span>
+	        </span>
+	   	    <span class="icon-span" href="http://sirrineprogramming.com/Sirrine_Resume.docx">
+		        <ion-icon class="icon" name="md-document"></ion-icon>
+		        <span class="icon-name">Resume</span>
+	        </span>
+	        -->
+		    <span class="icon-span" href="mailto:sirrineprogramming@gmail.com">
+		        <ion-icon class="icon" name="ios-mail"></ion-icon>
+		        <span class="icon-name">Contact</span>
+	        </span>
+		</div>
+		
+	  </div>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="portfolio.js"></script>
 </body>
 </html>
-
