@@ -40,9 +40,11 @@ body {
     flex: 1;
     padding-top: 4%;
     padding-left: 6.47%;
-	background-color:inherit;
-	flex-direction: column;
-	font-family: 'Poiret One', cursive; 	
+    background-color: inherit;
+    flex-direction: column;
+    font-family: 'Poiret One', cursive;
+    color: #333;
+    text-shadow: 1px 1px 7px #777;
 }
 
 .menu {
@@ -80,7 +82,7 @@ body {
 
 .icon-name {
     transition: opacity 1s ease-out;
-    opacity: 0;
+    opacity: 0.5;
     vertical-align: middle;
 }
 

@@ -68,7 +68,7 @@ const hideSpan = (e) => {
     let iconSpan = getIconSpan(e);
     let nameSpan = iconSpan.children[1];
     if(!iconSpan.getAttribute('game') || nameSpan.getAttribute('game') === 'false')
-        nameSpan.style.opacity = 0;
+        nameSpan.style.opacity = 0.5;
 }
 
 const showSpan = (e) => {
