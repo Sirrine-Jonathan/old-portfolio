@@ -36,14 +36,6 @@ function resizeHeader(){
 	header.style.width = videoWidth + "px";
 }
 
-window.addEventListener('resize', function(){
-	//resizeHeader();
-});
-
-window.addEventListener('load', function(){
-	//resizeHeader();
-});
-
 let projectsArr = document.getElementsByClassName('project');
 for(div in projectsArr){
 	if(!isNaN(div)){
@@ -134,8 +126,10 @@ for (let span in iconsArr){
     if (iconsArr[span].children){
         let iconSpan = iconsArr[span];
         let nameSpan = iconSpan.children[1];
+	/*
         if(!iconSpan.getAttribute('game') || nameSpan.getAttribute('game') === 'false')
         	nameSpan.style.opacity = 0;
+	*/
         iconSpan.setAttribute('staged', "false");
         iconSpan.addEventListener("mouseenter", showSpan);
         iconSpan.addEventListener("mouseleave", hideSpan);
